@@ -37,8 +37,9 @@ Upload:
 
 - `branding/social-preview.png`
 
-## Suggested Avatar
+## Suggested Icon Usage
 
-Use:
+GitHub repositories do not have a separate avatar. Use `branding/icon.svg` for one of these instead:
 
-- `branding/icon.svg`
+- your org or profile avatar, if you want the repo to visually match the launch assets
+- a future docs site favicon or app icon
