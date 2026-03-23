@@ -46,7 +46,7 @@
 
 ### 不装 skill 也能用
 
-1. 从 [examples](#示例) 里选一个风格指南
+1. 从 [网页案例](#网页案例) 或 [App 案例](#app-案例) 里选一个风格指南
 2. 把 `.md` 内容贴给你的 AI 助手
 3. 让它基于这个风格写一个全新的页面
 
@@ -55,8 +55,8 @@
 - 一个跨代理可复用的 skill
 - 一个可直接复制使用的风格指南模板
 - 一个可直接复用的 App UI 风格指南模板
-- 两个公开案例：`99percent` 和 `stripe`
-- `Stripe` 还带了第一份网站到 App 的延展示例
+- 两个公开网页案例：`99percent` 和 `stripe`
+- 一个公开 App 延展示例：`Stripe`
 - Stripe 案例附带更完整的原始提取资产
 
 ## Skill 内容
@@ -69,7 +69,7 @@
 - `references/quality-bar.md`：风格指南和 demo 的完成度标准
 - `agents/openai.yaml`：Codex / OpenAI 侧的技能元数据
 
-## 示例
+## 网页案例
 
 ### 99% Off Sale -> Product Page
 
@@ -115,7 +115,30 @@
 
 完整长图验证见：[stripe/demo-fullpage.png](./stripe/demo-fullpage.png)
 
-App 延展指南见：[stripe/stripe-app-ui-style.md](./stripe/stripe-app-ui-style.md)
+## App 案例
+
+### Stripe 网站风格 -> Payments Operations App
+
+这一例不是宣称“直接从 Stripe 产品后台提取到了完整 App UI”，而是把同一套网站视觉系统继续推导进一个桌面优先的运营型产品界面里。
+
+| App 指南 | App Demo |
+|----------|----------|
+| [stripe-app-ui-style.md](./stripe/stripe-app-ui-style.md) | [app-demo.html](./stripe/app-demo.html) |
+
+网页来源 vs App 延展：
+
+<table>
+  <tr>
+    <td width="50%"><strong>Website Source</strong></td>
+    <td width="50%"><strong>App Continuation</strong></td>
+  </tr>
+  <tr>
+    <td><img src="./stripe/ref-viewport.png" alt="Stripe website source screenshot" width="100%" /></td>
+    <td><img src="./stripe/app-demo-viewport.png" alt="Stripe app continuation screenshot" width="100%" /></td>
+  </tr>
+</table>
+
+完整 App 长图见：[stripe/app-demo-fullpage.png](./stripe/app-demo-fullpage.png)
 
 ## 风格指南结构
 
@@ -159,7 +182,9 @@ ui-style-extractor/
 └── stripe/
     ├── stripe-ui-style.md
     ├── stripe-app-ui-style.md
-    └── demo.html
+    ├── demo.html
+    ├── app-demo.html
+    └── app-demo-viewport.png
 ```
 
 ## FAQ
@@ -183,6 +208,10 @@ ui-style-extractor/
 **它现在也能产出 App UI 风格指南吗？**
 
 可以，但这层要理解成“基于网站视觉系统继续推导 App 规则”，而不是假装已经从源站直接提取到了完整产品 UI。公开版先用 `Stripe` 做了第一份示范。
+
+**为什么 App 示例先只放 Stripe？**
+
+因为 `Stripe` 最能证明这件事成立：它的网站 token、层级、边框、颜色和信息密度足够系统化，适合继续推导成 App。`99percent` 适合做网页风格提取示例，但不适合作为第一份公开 App 示例。
 
 ## License
 
