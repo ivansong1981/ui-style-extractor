@@ -1,10 +1,22 @@
+![ui-style-extractor banner](./branding/repo-banner.png)
+
 # ui-style-extractor
 
-Extract a website's UI style into reusable Markdown guides and validation demos for AI-generated pages.
+[中文说明](./README.zh-CN.md) | [English](./README.md)
+
+Extract a website's design system into reusable Markdown guides and validation demos for AI-generated pages.
 
 `ui-style-extractor` turns live sites, screenshots, and harvested CSS into AI-usable style guides. Instead of cloning a page, it extracts the visual system behind it: colors, typography, spacing, layout rules, components, motion, and the non-obvious design constraints that make new pages still feel native to the source.
 
-This repository now also includes an installable skill in [ui-style-extractor/](./ui-style-extractor/) that works for both Codex and Claude Code.
+This repository includes a canonical shared skill in [ui-style-extractor/](./ui-style-extractor/) that works with both Codex and Claude Code.
+
+## What It Does
+
+`ui-style-extractor` does not try to clone a page from a screenshot. It extracts the reusable rules behind the page, then gives those rules back to an AI in a format it can actually follow.
+
+- Inputs: live sites, screenshots, harvested CSS, computed styles, design tokens
+- Outputs: Markdown style guides, optional demo pages, validation screenshots
+- Goal: generate new pages that feel native to the source system without reusing the source content
 
 ## Why This Exists
 
@@ -43,21 +55,29 @@ You see a website with a design you love. You want that *feel* for your own proj
 - Two public end-to-end examples with reference vs generated screenshots
 - Raw extraction assets for a more complex design-system case (`stripe/`)
 
-## Skill Installation
+## Quick Start
+
+### Use the included skill
 
 The canonical skill lives in [ui-style-extractor/](./ui-style-extractor/).
 
-### Codex
+**Codex**
 
 1. Copy `ui-style-extractor/` into `${CODEX_HOME:-$HOME/.codex}/skills/`
-2. Invoke it with `$ui-style-extractor` or ask Codex to extract a site's design system into a Markdown style guide
+2. Invoke it with `$ui-style-extractor`
 
-### Claude Code
+**Claude Code**
 
 1. Copy `ui-style-extractor/` into your project `.claude/skills/` directory or into `~/.claude/skills/`
-2. Invoke it from Claude Code as `/ui-style-extractor` or ask Claude to extract a site's design system into a Markdown style guide
+2. Invoke it as `/ui-style-extractor`
 
 This repository also includes a project-local wrapper at [`.claude/skills/ui-style-extractor/`](./.claude/skills/ui-style-extractor/) so the same skill is immediately discoverable when you open this repo in Claude Code.
+
+### Use an existing guide directly
+
+1. Pick a style guide from the [examples](#examples)
+2. Paste it into your AI assistant
+3. Ask for a new page in that style
 
 ### What the skill includes
 
@@ -133,30 +153,23 @@ Every style guide follows the same skeleton (see [template](./style-guide-templa
 | **Example Component Code** | Copy-pastable reference implementations |
 | **Summary of Key Design Rules** | 15-20 non-negotiable rules for staying on-brand |
 
-## Getting Started
-
-### Use an existing style guide
-
-1. Pick a style guide from the [examples](#examples)
-2. Open your AI assistant (Claude, ChatGPT, Cursor, etc.)
-3. Paste the style guide as context
-4. Ask it to build a page: *"Build a pricing page using this style guide"*
-
-### Create your own style guide
+## Create Your Own Guide
 
 1. Copy [style-guide-template.md](./style-guide-template.md)
-2. Analyze your target website (DevTools → inspect colors, fonts, spacing, components)
-3. Fill in each section of the template
-4. Use the completed guide to generate pages
+2. Analyze your target website in DevTools
+3. Fill in each section using exact values where possible
+4. Use the completed guide to generate new pages
 
-> **Tip**: You can also ask an AI to help fill the template. Give it screenshots of the target site plus the blank template, and ask it to extract the design system.
+Tip: you can also ask an AI to help fill the template. Give it screenshots of the target site plus the blank template, and ask it to extract the design system.
 
 ## Project Structure
 
 ```
 ui-style-extractor/
 ├── README.md                          # Project overview and usage
+├── README.zh-CN.md                    # Chinese documentation
 ├── LICENSE                            # MIT license
+├── branding/                          # Logo, banner, and social preview assets
 ├── ui-style-extractor/                # Canonical shared skill (Codex + Claude)
 │   ├── SKILL.md
 │   ├── agents/openai.yaml
@@ -178,6 +191,10 @@ ui-style-extractor/
 **Can I install this as a Codex or Claude Code skill?**
 
 Yes. Copy [ui-style-extractor/](./ui-style-extractor/) into your Codex or Claude skills directory. The same canonical skill folder works for both; this repo's [`.claude/skills/ui-style-extractor/`](./.claude/skills/ui-style-extractor/) folder is only a local project wrapper for Claude discovery.
+
+**Why add a Chinese README?**
+
+Because the likely users are split between English-speaking open-source readers and Chinese-speaking builders. The English README stays launch-friendly for GitHub, while the Chinese README lowers the adoption cost for the actual workflow.
 
 **Why only two public examples?**
 

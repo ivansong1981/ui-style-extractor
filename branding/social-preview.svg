@@ -1,0 +1,48 @@
+<svg width="1280" height="640" viewBox="0 0 1280 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="heroAccent" x1="198" y1="126" x2="1114" y2="502" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF6B3D"/>
+      <stop offset="0.5" stop-color="#F4B942"/>
+      <stop offset="1" stop-color="#0FB8A4"/>
+    </linearGradient>
+    <filter id="stackShadow" x="92" y="128" width="566" height="430" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="28" stdDeviation="24" flood-color="#0F1720" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+  <rect width="1280" height="640" fill="#F4EEDF"/>
+  <rect x="56" y="56" width="1168" height="528" rx="42" fill="#FFF8EF" stroke="#D8CEBF" stroke-width="2"/>
+  <rect x="98" y="98" width="1084" height="444" rx="28" fill="#0F1720"/>
+  <g filter="url(#stackShadow)">
+    <rect x="162" y="160" width="280" height="206" rx="24" fill="#FFF8EF"/>
+    <circle cx="202" cy="198" r="10" fill="#FF6B3D"/>
+    <circle cx="234" cy="198" r="10" fill="#F4B942"/>
+    <circle cx="266" cy="198" r="10" fill="#0FB8A4"/>
+    <rect x="196" y="242" width="98" height="14" rx="7" fill="#0F1720"/>
+    <rect x="196" y="274" width="200" height="16" rx="8" fill="#2A3440" fill-opacity="0.16"/>
+    <rect x="196" y="308" width="164" height="16" rx="8" fill="#2A3440" fill-opacity="0.16"/>
+    <rect x="196" y="340" width="132" height="28" rx="14" fill="#FF6B3D"/>
+    <rect x="326" y="284" width="170" height="130" rx="24" fill="#0F1720"/>
+    <path d="M360 316H466" stroke="url(#heroAccent)" stroke-width="14" stroke-linecap="round"/>
+    <path d="M360 350H442" stroke="#FFF8EF" stroke-width="14" stroke-linecap="round"/>
+    <path d="M360 384H420" stroke="#FFF8EF" stroke-opacity="0.6" stroke-width="14" stroke-linecap="round"/>
+  </g>
+  <path d="M140 136H192" stroke="#FFF8EF" stroke-width="8" stroke-linecap="round"/>
+  <path d="M140 136V188" stroke="#FFF8EF" stroke-width="8" stroke-linecap="round"/>
+  <path d="M1048 136H1100" stroke="#FFF8EF" stroke-width="8" stroke-linecap="round"/>
+  <path d="M1100 136V188" stroke="#FFF8EF" stroke-width="8" stroke-linecap="round"/>
+  <path d="M140 452H192" stroke="#FFF8EF" stroke-width="8" stroke-linecap="round"/>
+  <path d="M140 452V504" stroke="#FFF8EF" stroke-width="8" stroke-linecap="round"/>
+  <path d="M1048 504H1100" stroke="#FFF8EF" stroke-width="8" stroke-linecap="round"/>
+  <path d="M1100 452V504" stroke="#FFF8EF" stroke-width="8" stroke-linecap="round"/>
+  <text x="610" y="228" fill="#FFF8EF" font-size="74" font-weight="800" font-family="'Avenir Next', 'Segoe UI', sans-serif" letter-spacing="-0.05em">ui-style-extractor</text>
+  <text x="610" y="286" fill="#C8D1DB" font-size="26" font-weight="500" font-family="'Avenir Next', 'Segoe UI', sans-serif">Extract UI systems into reusable Markdown guides for AI-generated pages.</text>
+  <g transform="translate(610 328)">
+    <rect x="0" y="0" width="176" height="42" rx="21" fill="#FF6B3D"/>
+    <text x="88" y="27" text-anchor="middle" fill="#FFF8EF" font-size="16" font-weight="700" font-family="'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace">STYLE EXTRACTION</text>
+    <rect x="192" y="0" width="156" height="42" rx="21" fill="#0FB8A4"/>
+    <text x="270" y="27" text-anchor="middle" fill="#0F1720" font-size="16" font-weight="700" font-family="'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace">AI-READY MD</text>
+    <rect x="364" y="0" width="168" height="42" rx="21" fill="#FFF8EF"/>
+    <text x="448" y="27" text-anchor="middle" fill="#0F1720" font-size="16" font-weight="700" font-family="'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace">DEMO VALIDATION</text>
+  </g>
+  <text x="610" y="418" fill="#8FA0B2" font-size="18" font-weight="600" font-family="'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace">Codex skill + Claude Code wrapper + public examples</text>
+</svg>

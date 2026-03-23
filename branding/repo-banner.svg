@@ -1,0 +1,58 @@
+<svg width="1280" height="640" viewBox="0 0 1280 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bannerAccent" x1="190" y1="94" x2="1124" y2="568" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF6B3D"/>
+      <stop offset="0.5" stop-color="#F4B942"/>
+      <stop offset="1" stop-color="#0FB8A4"/>
+    </linearGradient>
+    <linearGradient id="cardGlow" x1="234" y1="168" x2="581" y2="507" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF8EF"/>
+      <stop offset="1" stop-color="#EDE4D5"/>
+    </linearGradient>
+    <filter id="panelShadow" x="120" y="104" width="526" height="510" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="30" stdDeviation="26" flood-color="#0F1720" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+  <rect width="1280" height="640" fill="#F4EEDF"/>
+  <path d="M0 77H1280" stroke="#D9D0C2" stroke-width="2"/>
+  <path d="M0 563H1280" stroke="#D9D0C2" stroke-width="2"/>
+  <path d="M118 0V640" stroke="#D9D0C2" stroke-width="2"/>
+  <path d="M1162 0V640" stroke="#D9D0C2" stroke-width="2"/>
+  <rect x="74" y="52" width="1132" height="536" rx="40" fill="#FFF8EF" stroke="#D8CEBF" stroke-width="2"/>
+  <rect x="112" y="92" width="1056" height="456" rx="28" fill="#0F1720"/>
+  <g filter="url(#panelShadow)">
+    <path d="M217.637 129.541C215.146 106.153 233.444 85.3559 256.944 85.3559H520.614C540.046 85.3559 556.155 100.248 558.342 119.556L591.363 410.959C593.854 434.347 575.556 455.144 552.056 455.144H288.386C268.954 455.144 252.845 440.252 250.658 420.944L217.637 129.541Z" fill="#0F1720"/>
+    <path d="M236.258 140.815C234.118 120.709 249.845 102.83 270.064 102.83H505.236C521.946 102.83 535.799 115.64 537.679 132.243L566.742 388.815C568.882 408.921 553.155 426.8 532.936 426.8H297.764C281.054 426.8 267.201 413.99 265.321 397.387L236.258 140.815Z" fill="url(#cardGlow)"/>
+    <circle cx="282" cy="141" r="10" fill="#FF6B3D"/>
+    <circle cx="316" cy="145" r="10" fill="#F4B942"/>
+    <circle cx="350" cy="149" r="10" fill="#0FB8A4"/>
+    <rect x="295" y="189" width="112" height="16" rx="8" transform="rotate(6 295 189)" fill="#0F1720"/>
+    <rect x="295" y="226" width="208" height="18" rx="9" transform="rotate(6 295 226)" fill="#293443" fill-opacity="0.18"/>
+    <rect x="295" y="267" width="174" height="18" rx="9" transform="rotate(6 295 267)" fill="#293443" fill-opacity="0.18"/>
+    <rect x="295" y="308" width="248" height="84" rx="24" transform="rotate(6 295 308)" fill="#0F1720"/>
+    <path d="M342 344H500" stroke="url(#bannerAccent)" stroke-width="14" stroke-linecap="round"/>
+    <path d="M342 378H475" stroke="#FFF8EF" stroke-width="14" stroke-linecap="round"/>
+    <path d="M342 412H438" stroke="#FFF8EF" stroke-opacity="0.62" stroke-width="14" stroke-linecap="round"/>
+  </g>
+  <path d="M180 146H232" stroke="#FFF8EF" stroke-width="8" stroke-linecap="round"/>
+  <path d="M180 146V198" stroke="#FFF8EF" stroke-width="8" stroke-linecap="round"/>
+  <path d="M1028 146H1080" stroke="#FFF8EF" stroke-width="8" stroke-linecap="round"/>
+  <path d="M1080 146V198" stroke="#FFF8EF" stroke-width="8" stroke-linecap="round"/>
+  <path d="M180 442H232" stroke="#FFF8EF" stroke-width="8" stroke-linecap="round"/>
+  <path d="M180 442V494" stroke="#FFF8EF" stroke-width="8" stroke-linecap="round"/>
+  <path d="M1028 494H1080" stroke="#FFF8EF" stroke-width="8" stroke-linecap="round"/>
+  <path d="M1080 442V494" stroke="#FFF8EF" stroke-width="8" stroke-linecap="round"/>
+  <text x="652" y="224" fill="#FFF8EF" font-size="82" font-weight="800" font-family="'Avenir Next', 'Segoe UI', sans-serif" letter-spacing="-0.05em">ui-style-extractor</text>
+  <text x="652" y="286" fill="#C8D1DB" font-size="28" font-weight="500" font-family="'Avenir Next', 'Segoe UI', sans-serif">Extract UI systems into reusable Markdown guides and validation demos.</text>
+  <g transform="translate(652 336)">
+    <rect x="0" y="0" width="140" height="40" rx="20" fill="#FF6B3D"/>
+    <text x="70" y="26" text-anchor="middle" fill="#FFF8EF" font-size="16" font-weight="700" font-family="'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace">STYLE GUIDE</text>
+    <rect x="156" y="0" width="132" height="40" rx="20" fill="#0FB8A4"/>
+    <text x="222" y="26" text-anchor="middle" fill="#0F1720" font-size="16" font-weight="700" font-family="'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace">DEMO PAGE</text>
+    <rect x="304" y="0" width="116" height="40" rx="20" fill="#FFF8EF"/>
+    <text x="362" y="26" text-anchor="middle" fill="#0F1720" font-size="16" font-weight="700" font-family="'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace">CODEX</text>
+    <rect x="436" y="0" width="172" height="40" rx="20" fill="#FFF8EF"/>
+    <text x="522" y="26" text-anchor="middle" fill="#0F1720" font-size="16" font-weight="700" font-family="'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace">CLAUDE CODE</text>
+  </g>
+  <text x="652" y="442" fill="#8FA0B2" font-size="18" font-weight="600" font-family="'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace">target website -> style guide -> original page in the same visual language</text>
+</svg>
