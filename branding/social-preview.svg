@@ -34,15 +34,17 @@
   <path d="M140 452V504" stroke="#FFF8EF" stroke-width="8" stroke-linecap="round"/>
   <path d="M1048 504H1100" stroke="#FFF8EF" stroke-width="8" stroke-linecap="round"/>
   <path d="M1100 452V504" stroke="#FFF8EF" stroke-width="8" stroke-linecap="round"/>
-  <text x="610" y="228" fill="#FFF8EF" font-size="74" font-weight="800" font-family="'Avenir Next', 'Segoe UI', sans-serif" letter-spacing="-0.05em">ui-style-extractor</text>
-  <text x="610" y="286" fill="#C8D1DB" font-size="26" font-weight="500" font-family="'Avenir Next', 'Segoe UI', sans-serif">Extract UI systems into reusable Markdown guides for AI-generated pages.</text>
-  <g transform="translate(610 328)">
-    <rect x="0" y="0" width="176" height="42" rx="21" fill="#FF6B3D"/>
-    <text x="88" y="27" text-anchor="middle" fill="#FFF8EF" font-size="16" font-weight="700" font-family="'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace">STYLE EXTRACTION</text>
-    <rect x="192" y="0" width="156" height="42" rx="21" fill="#0FB8A4"/>
-    <text x="270" y="27" text-anchor="middle" fill="#0F1720" font-size="16" font-weight="700" font-family="'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace">AI-READY MD</text>
-    <rect x="364" y="0" width="168" height="42" rx="21" fill="#FFF8EF"/>
-    <text x="448" y="27" text-anchor="middle" fill="#0F1720" font-size="16" font-weight="700" font-family="'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace">DEMO VALIDATION</text>
+  <text x="606" y="214" fill="#FFF8EF" font-size="60" font-weight="800" font-family="'Avenir Next', 'Segoe UI', sans-serif" letter-spacing="-0.04em">ui-style</text>
+  <text x="606" y="274" fill="#FFF8EF" font-size="60" font-weight="800" font-family="'Avenir Next', 'Segoe UI', sans-serif" letter-spacing="-0.04em">extractor</text>
+  <text x="606" y="322" fill="#C8D1DB" font-size="23" font-weight="500" font-family="'Avenir Next', 'Segoe UI', sans-serif">Extract UI systems into reusable</text>
+  <text x="606" y="352" fill="#C8D1DB" font-size="23" font-weight="500" font-family="'Avenir Next', 'Segoe UI', sans-serif">Markdown guides for AI-generated pages.</text>
+  <g transform="translate(606 392)">
+    <rect x="0" y="0" width="148" height="42" rx="21" fill="#FF6B3D"/>
+    <text x="74" y="27" text-anchor="middle" fill="#FFF8EF" font-size="15" font-weight="700" font-family="'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace">STYLE GUIDE</text>
+    <rect x="164" y="0" width="152" height="42" rx="21" fill="#0FB8A4"/>
+    <text x="240" y="27" text-anchor="middle" fill="#0F1720" font-size="15" font-weight="700" font-family="'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace">AI-READY MD</text>
+    <rect x="332" y="0" width="142" height="42" rx="21" fill="#FFF8EF"/>
+    <text x="403" y="27" text-anchor="middle" fill="#0F1720" font-size="15" font-weight="700" font-family="'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace">DEMO PAGE</text>
   </g>
-  <text x="610" y="418" fill="#8FA0B2" font-size="18" font-weight="600" font-family="'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace">Codex skill + Claude Code wrapper + public examples</text>
+  <text x="606" y="470" fill="#8FA0B2" font-size="17" font-weight="600" font-family="'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace">Codex skill + Claude Code wrapper + public examples</text>
 </svg>
