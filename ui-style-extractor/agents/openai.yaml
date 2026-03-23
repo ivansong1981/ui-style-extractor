@@ -1,4 +1,4 @@
 interface:
   display_name: "UI Style Extractor"
-  short_description: "Extract website UI styles into reusable guides"
-  default_prompt: "Use $ui-style-extractor to extract website design systems into markdown style guides and generate validation pages in the same visual language."
+  short_description: "Extract website UI styles into reusable website and app guides"
+  default_prompt: "Use $ui-style-extractor to extract website design systems into markdown style guides, optional website demos, and optional app UI style guides in the same visual language."

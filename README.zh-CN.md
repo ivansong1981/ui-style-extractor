@@ -54,14 +54,18 @@
 
 - 一个跨代理可复用的 skill
 - 一个可直接复制使用的风格指南模板
+- 一个可直接复用的 App UI 风格指南模板
 - 两个公开案例：`99percent` 和 `stripe`
+- `Stripe` 还带了第一份网站到 App 的延展示例
 - Stripe 案例附带更完整的原始提取资产
 
 ## Skill 内容
 
 - `SKILL.md`：触发说明和提取流程
 - `assets/style-guide-template.md`：空白模板
+- `assets/app-ui-style-template.md`：App UI 风格指南模板
 - `references/extraction-workflow.md`：详细提取方法
+- `references/app-adaptation-workflow.md`：如何从网站风格继续推导 App UI
 - `references/quality-bar.md`：风格指南和 demo 的完成度标准
 - `agents/openai.yaml`：Codex / OpenAI 侧的技能元数据
 
@@ -111,6 +115,8 @@
 
 完整长图验证见：[stripe/demo-fullpage.png](./stripe/demo-fullpage.png)
 
+App 延展指南见：[stripe/stripe-app-ui-style.md](./stripe/stripe-app-ui-style.md)
+
 ## 风格指南结构
 
 所有风格指南都基于同一套模板，见 [style-guide-template.md](./style-guide-template.md)。
@@ -145,9 +151,15 @@ ui-style-extractor/
 ├── branding/
 ├── ui-style-extractor/
 ├── .claude/skills/ui-style-extractor/
+├── app-ui-style-template.md
 ├── style-guide-template.md
 ├── 99percent/
+│   ├── 99percent-ui-style.md
+│   └── demo.html
 └── stripe/
+    ├── stripe-ui-style.md
+    ├── stripe-app-ui-style.md
+    └── demo.html
 ```
 
 ## FAQ
@@ -167,6 +179,10 @@ ui-style-extractor/
 **Codex 和 Claude Code 能共用同一个 skill 吗？**
 
 可以。主 skill 就是 [ui-style-extractor/](./ui-style-extractor/)，`.claude/skills/ui-style-extractor/` 只是为了让 Claude 在本仓库里直接发现它。
+
+**它现在也能产出 App UI 风格指南吗？**
+
+可以，但这层要理解成“基于网站视觉系统继续推导 App 规则”，而不是假装已经从源站直接提取到了完整产品 UI。公开版先用 `Stripe` 做了第一份示范。
 
 ## License
 

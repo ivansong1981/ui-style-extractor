@@ -1,6 +1,6 @@
 ---
 name: ui-style-extractor
-description: Extract visual design systems from existing websites into reusable markdown style guides and optional validation pages. Use when Codex needs to analyze a live site, screenshots, or harvested CSS to document colors, typography, spacing, layout, components, motion, and design rules, or when generating new UI that should match a reference site's visual language without copying its content.
+description: Extract visual design systems from existing websites into reusable markdown style guides, optional website demos, and optional app UI style guides. Use when Codex needs to analyze a live site, screenshots, or harvested CSS to document colors, typography, spacing, layout, components, motion, and design rules, or when generating new website or app UI that should match a reference site's visual language without copying its content.
 ---
 
 # UI Style Extractor
@@ -10,8 +10,10 @@ Extract a site's visual language into a reusable Markdown guide, then use that g
 ## Workflow
 
 1. Decide the output first.
-   - Produce only a style guide when the user wants documentation or prompt context.
-   - Produce a style guide plus demo page when the user wants validation.
+   - Produce only a website style guide when the user wants documentation or prompt context.
+   - Produce a website style guide plus demo page when the user wants website validation.
+   - Produce a website style guide plus app UI style guide when the user wants the visual system translated into product UI.
+   - Produce all three only when the user explicitly wants both website and app outputs.
 2. Build the evidence set before writing.
    - Prefer production CSS, design tokens, computed styles, and real DOM structure over screenshot-only guesses.
    - Inspect at least the homepage and one secondary page unless the user gives a tighter scope.
@@ -22,9 +24,10 @@ Extract a site's visual language into a reusable Markdown guide, then use that g
 4. Distill repeated patterns into system rules.
    - Promote only repeated values into palette, spacing, radius, shadow, or motion tokens.
    - Keep one-off values in component notes unless they clearly define the brand language.
-5. Generate the demo only after the guide is stable.
+5. Generate derivative outputs only after the website guide is stable.
    - Change the copy, product, and brand-specific content.
    - Preserve the design grammar: typography hierarchy, spacing rhythm, component treatment, and motion behavior.
+   - For app guides, inherit the token layer first, then mark shell, workflow, and state patterns as adapted or inferred where necessary.
 6. Validate against the reference.
    - Compare screenshots side by side.
    - Tighten the guide if the generated page drifts from the source.
@@ -47,15 +50,26 @@ Extract a site's visual language into a reusable Markdown guide, then use that g
 - Include only enough interactivity to demonstrate the system.
 - If fidelity depends on animation, gradients, or texture, implement them rather than omitting them.
 
+## App Guide Rules
+
+- Treat app UI guides as a derived artifact unless real product UI was also analyzed.
+- Explicitly separate inherited website tokens from adapted or inferred app patterns.
+- Define the product assumption near the top: dashboard, admin panel, consumer utility, and so on.
+- Keep app shells, data views, and forms consistent with the source system instead of defaulting to a generic SaaS aesthetic.
+- If the source is mostly marketing UI, reduce decorative gradients and oversized hero spacing in app contexts.
+
 ## Output Conventions
 
 - Prefer `<site>/<site>-ui-style.md` for guide files when working in a multi-example repo.
 - Prefer `<site>/demo.html` for validation pages.
+- Prefer `<site>/<site>-app-ui-style.md` for app adaptation guides.
 - Keep reference captures close to the example, such as `ref-viewport.png` or `ref-fullpage.png`.
 - Keep guides in Markdown and keep component examples copyable.
 
 ## Resources
 
 - Use `assets/style-guide-template.md` as the blank extraction template.
+- Use `assets/app-ui-style-template.md` as the blank app adaptation template.
 - Read `references/extraction-workflow.md` when you need the detailed page-selection and evidence-gathering workflow.
+- Read `references/app-adaptation-workflow.md` when translating a website system into an app UI guide.
 - Read `references/quality-bar.md` when deciding whether a guide or demo is complete enough to ship.

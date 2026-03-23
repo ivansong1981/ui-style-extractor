@@ -52,7 +52,9 @@ You see a website with a design you love. You want that *feel* for your own proj
 
 - An installable cross-agent skill in [ui-style-extractor/](./ui-style-extractor/)
 - A reusable style-guide template
+- A reusable app UI style-guide template
 - Two public end-to-end examples with reference vs generated screenshots
+- A first website-to-app continuation example for `stripe`
 - Raw extraction assets for a more complex design-system case (`stripe/`)
 
 ## Quick Start
@@ -83,7 +85,9 @@ This repository also includes a project-local wrapper at [`.claude/skills/ui-sty
 
 - `SKILL.md` — trigger description and workflow for extraction + validation
 - `assets/style-guide-template.md` — reusable blank template
+- `assets/app-ui-style-template.md` — reusable app adaptation template
 - `references/extraction-workflow.md` — detailed extraction method
+- `references/app-adaptation-workflow.md` — how to derive app UI rules from a website guide
 - `references/quality-bar.md` — shipping checklist for guides and demos
 - `agents/openai.yaml` — Codex/OpenAI UI metadata for skill pickers
 
@@ -133,6 +137,8 @@ Reference vs generated:
 
 Full-page validation screenshot: [stripe/demo-fullpage.png](./stripe/demo-fullpage.png)
 
+App continuation guide: [stripe/stripe-app-ui-style.md](./stripe/stripe-app-ui-style.md)
+
 ## Style Guide Structure
 
 Every style guide follows the same skeleton (see [template](./style-guide-template.md)):
@@ -176,12 +182,14 @@ ui-style-extractor/
 │   ├── assets/style-guide-template.md
 │   └── references/
 ├── .claude/skills/ui-style-extractor/ # Project-local Claude discovery wrapper
+├── app-ui-style-template.md           # Repo-level app adaptation template source
 ├── style-guide-template.md            # Repo-level editable template source
 ├── 99percent/
 │   ├── 99percent-ui-style.md          # Example: 99% Off Sale design system
 │   └── demo.html                      # Example: generated product page
 ├── stripe/
 │   ├── stripe-ui-style.md             # Example: Stripe marketing system
+│   ├── stripe-app-ui-style.md         # Example: app continuation of the Stripe system
 │   ├── demo.html                      # Example: generated validation page
 │   └── demo-viewport.png              # Validation screenshot used in README
 ```
@@ -191,6 +199,10 @@ ui-style-extractor/
 **Can I install this as a Codex or Claude Code skill?**
 
 Yes. Copy [ui-style-extractor/](./ui-style-extractor/) into your Codex or Claude skills directory. The same canonical skill folder works for both; this repo's [`.claude/skills/ui-style-extractor/`](./.claude/skills/ui-style-extractor/) folder is only a local project wrapper for Claude discovery.
+
+**Can it generate app UI guidance too?**
+
+Yes. The skill can now produce a website style guide only, a website guide plus demo, or a website guide plus app UI style guide derived from the extracted token system.
 
 **Why add a Chinese README?**
 

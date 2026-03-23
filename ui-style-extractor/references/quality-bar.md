@@ -27,6 +27,15 @@ Ship a guide only when it meets this bar.
 - Major states such as hover, active, or inverted sections are represented when they matter.
 - A side-by-side screenshot comparison would show family resemblance immediately.
 
+## App Guide Checklist
+
+- The guide states clearly that app-specific shell and workflow decisions may be adapted or inferred.
+- Token inheritance from the website guide is explicit: color, type, spacing, radius, border, shadow, motion.
+- The guide defines a product assumption such as dashboard, admin panel, or consumer utility instead of drifting between app types.
+- Core screen types are covered: dashboard or overview, list/table, detail, form, settings.
+- Interaction states are defined: focus, selected, loading, empty, success, warning, error, destructive.
+- The app rules feel like a continuation of the source system, not a generic SaaS kit with pasted colors.
+
 ## Failure Modes
 
 Do not ship the guide yet if any of these are true:
@@ -36,3 +45,4 @@ Do not ship the guide yet if any of these are true:
 - Typography notes describe mood but omit actual sizes, weights, or spacing patterns.
 - The summary rules are too generic to constrain another model.
 - The demo looks like a generic landing page with borrowed colors.
+- The app guide claims inferred product patterns were directly extracted from the source.
