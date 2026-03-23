@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Playwright CLI temp files
+.playwright-cli/
+
+# Build output / screenshots from automation
+output/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment
+.env
+.env.local
+
+# Local private assets not intended for open source
+_private/

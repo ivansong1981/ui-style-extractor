@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>99% Off Sale — Style Validation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'sale-red': '#FF0000',
+            'sale-white': '#FFFFFF',
+          },
+          fontFamily: {
+            'helvetica-cond': ['"Helvetica Neue"', '"Arial Narrow"', 'Arial', 'sans-serif'],
+            'helvetica': ['"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
+            'space-mono': ['"Space Mono"', 'monospace'],
+          },
+          maxWidth: {
+            'page': '1080px',
+            'deals': '930px',
+            'faq': '760px',
+            'compact': '650px',
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+      animation: marquee 15s linear infinite;
+    }
+    body {
+      -webkit-font-smoothing: antialiased;
+    }
+    /* Condensed font simulation — stretch narrow */
+    .font-cond {
+      font-stretch: condensed;
+      font-family: "Helvetica Neue", "Arial Narrow", Arial, sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-sale-red text-sale-white font-helvetica text-base leading-[1.1] m-0 p-0">
+
+  <!-- ==================== HERO ==================== -->
+  <header class="text-center py-[92px] px-10 flex flex-col items-center gap-6 max-w-page mx-auto">
+    <h1 class="font-cond text-[80px] font-black uppercase leading-none tracking-[-3px]">
+      99% Off Sale
+    </h1>
+    <p class="font-helvetica text-[26px] font-normal leading-[1.1] tracking-[-0.32px] max-w-compact">
+      Today is Black Friday, Cards Against Humanity's favorite day of the year.
+      To celebrate, we're offering 99% off everything in the store.
+    </p>
+    <p class="font-helvetica text-[26px] font-normal leading-[1.1] tracking-[-0.32px] max-w-compact mt-4">
+      That's right. 99%. It's pretty much as big as a number can get.
+      As the ancient Mayans foretold, a savings event of this magnitude
+      would herald the end of civilization.
+    </p>
+  </header>
+
+  <!-- ==================== PRODUCT DEALS ==================== -->
+  <div class="flex flex-col gap-[56px] px-[18px] max-w-deals mx-auto pb-[56px]">
+
+    <!-- Deal 1: image left, info right -->
+    <div class="flex flex-row border border-sale-white relative">
+      <div class="flex-1 bg-sale-white flex items-center justify-center relative min-h-[300px]">
+        <span class="text-sale-red font-cond text-[60px] font-black opacity-20">IMG</span>
+        <!-- Sticker -->
+        <div class="absolute top-0 right-0 z-[100] bg-sale-white text-sale-red px-3 py-2">
+          <span class="font-cond text-[14px] font-black uppercase">99% Off</span>
+        </div>
+      </div>
+      <div class="flex-1 p-5 flex flex-col gap-[5px] justify-center">
+        <h3 class="font-cond text-[39px] font-black leading-none tracking-[-0.32px]">
+          Labubu
+        </h3>
+        <div class="flex items-baseline gap-3 mt-2">
+          <span class="font-cond text-[44px] font-black leading-none tracking-[-0.32px]">$0.40</span>
+          <s class="font-cond text-[19px] font-bold line-through">$39.99</s>
+        </div>
+        <p class="font-helvetica text-[16px] font-normal leading-[1.1] mt-2">
+          The collectible figure everyone's fighting over. Now practically free.
+        </p>
+        <button class="font-cond text-[37px] font-black uppercase
+                       bg-sale-white text-sale-red border border-sale-red
+                       rounded-none px-[30px] py-[10px] mt-4 self-start
+                       transition-colors duration-100 ease-linear cursor-pointer
+                       hover:bg-sale-red hover:text-sale-white hover:border-sale-white">
+          Sold Out
+        </button>
+      </div>
+    </div>
+
+    <!-- Deal 2: image right, info left (reversed) -->
+    <div class="flex flex-row-reverse border border-sale-white relative">
+      <div class="flex-1 bg-sale-white flex items-center justify-center relative min-h-[300px]">
+        <span class="text-sale-red font-cond text-[60px] font-black opacity-20">IMG</span>
+        <div class="absolute top-0 right-0 z-[100] bg-sale-white text-sale-red px-3 py-2">
+          <span class="font-cond text-[14px] font-black uppercase">99% Off</span>
+        </div>
+      </div>
+      <div class="flex-1 p-5 flex flex-col gap-[5px] justify-center">
+        <h3 class="font-cond text-[39px] font-black leading-none tracking-[-0.32px]">
+          100-inch 4K UHD QLED Smart TV
+        </h3>
+        <div class="flex items-baseline gap-3 mt-2">
+          <span class="font-cond text-[44px] font-black leading-none tracking-[-0.32px]">$19.99</span>
+          <s class="font-cond text-[19px] font-bold line-through">$1,999</s>
+        </div>
+        <p class="font-helvetica text-[16px] font-normal leading-[1.1] mt-2">
+          A television so large it barely fits through a standard doorway.
+        </p>
+        <button class="font-cond text-[37px] font-black uppercase
+                       bg-sale-white text-sale-red border border-sale-red
+                       rounded-none px-[30px] py-[10px] mt-4 self-start
+                       transition-colors duration-100 ease-linear cursor-pointer
+                       hover:bg-sale-red hover:text-sale-white hover:border-sale-white">
+          Sold Out
+        </button>
+      </div>
+    </div>
+
+    <!-- Deal 3: image left again -->
+    <div class="flex flex-row border border-sale-white relative">
+      <div class="flex-1 bg-sale-white flex items-center justify-center relative min-h-[300px]">
+        <span class="text-sale-red font-cond text-[60px] font-black opacity-20">IMG</span>
+        <div class="absolute top-0 right-0 z-[100] bg-sale-white text-sale-red px-3 py-2">
+          <span class="font-cond text-[14px] font-black uppercase">99% Off</span>
+        </div>
+      </div>
+      <div class="flex-1 p-5 flex flex-col gap-[5px] justify-center">
+        <h3 class="font-cond text-[39px] font-black leading-none tracking-[-0.32px]">
+          Hermès Birkin Bag
+        </h3>
+        <div class="flex items-baseline gap-3 mt-2">
+          <span class="font-cond text-[44px] font-black leading-none tracking-[-0.32px]">$51.50</span>
+          <s class="font-cond text-[19px] font-bold line-through">$5,150</s>
+        </div>
+        <p class="font-helvetica text-[16px] font-normal leading-[1.1] mt-2">
+          The most coveted handbag in the world. One percent of the price.
+        </p>
+        <button class="font-cond text-[37px] font-black uppercase
+                       bg-sale-white text-sale-red border border-sale-red
+                       rounded-none px-[30px] py-[10px] mt-4 self-start
+                       transition-colors duration-100 ease-linear cursor-pointer
+                       hover:bg-sale-red hover:text-sale-white hover:border-sale-white">
+          Buy Now
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MARQUEE DIVIDER ==================== -->
+  <div class="overflow-hidden py-4 border-y border-sale-white">
+    <div class="flex whitespace-nowrap animate-marquee">
+      <span class="font-cond text-[124px] font-black uppercase leading-none tracking-[-5px]">
+        Deals You Missed&nbsp;&nbsp;&nbsp;&nbsp;Deals You Missed&nbsp;&nbsp;&nbsp;&nbsp;Deals You Missed&nbsp;&nbsp;&nbsp;&nbsp;Deals You Missed&nbsp;&nbsp;&nbsp;&nbsp;
+      </span>
+      <span class="font-cond text-[124px] font-black uppercase leading-none tracking-[-5px]" aria-hidden="true">
+        Deals You Missed&nbsp;&nbsp;&nbsp;&nbsp;Deals You Missed&nbsp;&nbsp;&nbsp;&nbsp;Deals You Missed&nbsp;&nbsp;&nbsp;&nbsp;Deals You Missed&nbsp;&nbsp;&nbsp;&nbsp;
+      </span>
+    </div>
+  </div>
+
+  <!-- ==================== FAQ SECTION (INVERTED) ==================== -->
+  <section class="bg-sale-white text-sale-red py-20">
+    <div class="max-w-faq mx-auto px-5">
+      <h2 class="font-cond text-[40px] font-black uppercase mb-10">
+        Frequently Asked Questions
+      </h2>
+
+      <div class="flex flex-col gap-6">
+        <div class="border-b border-sale-red pb-6">
+          <h4 class="font-cond text-[24px] font-black">Is this real?</h4>
+          <p class="font-helvetica text-[16px] font-normal mt-2 leading-[1.4]">
+            Yes. Everything on this page was actually for sale at 99% off the retail price.
+          </p>
+        </div>
+        <div class="border-b border-sale-red pb-6">
+          <h4 class="font-cond text-[24px] font-black">Why is everything sold out?</h4>
+          <p class="font-helvetica text-[16px] font-normal mt-2 leading-[1.4]">
+            Because it was 99% off. Obviously. What did you expect?
+          </p>
+        </div>
+        <div class="border-b border-sale-red pb-6">
+          <h4 class="font-cond text-[24px] font-black">Will there be a 100% off sale?</h4>
+          <p class="font-helvetica text-[16px] font-normal mt-2 leading-[1.4]">
+            That's called stealing, but we admire your ambition.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== MARQUEE DIVIDER 2 ==================== -->
+  <div class="overflow-hidden py-4 bg-sale-white border-y border-sale-red">
+    <div class="flex whitespace-nowrap animate-marquee">
+      <span class="font-cond text-[124px] font-black uppercase leading-none tracking-[-5px] text-sale-red">
+        Frequently Asked Questions&nbsp;&nbsp;&nbsp;&nbsp;Frequently Asked Questions&nbsp;&nbsp;&nbsp;&nbsp;
+      </span>
+      <span class="font-cond text-[124px] font-black uppercase leading-none tracking-[-5px] text-sale-red" aria-hidden="true">
+        Frequently Asked Questions&nbsp;&nbsp;&nbsp;&nbsp;Frequently Asked Questions&nbsp;&nbsp;&nbsp;&nbsp;
+      </span>
+    </div>
+  </div>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-sale-red text-sale-white py-10 text-center">
+    <p class="font-helvetica text-[16px] font-normal">
+      &copy; 2024 Cards Against Humanity, LLC. All rights reserved.
+    </p>
+    <p class="font-space-mono text-[14px] mt-4 opacity-80">
+      No refunds. No returns. No regrets.
+    </p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stripe Style Validation Demo</title>
+    <meta
+      name="description"
+      content="An original landing page built against the Stripe marketing UI style guide."
+    />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --surface: #f8fafd;
+        --border: #e5edf5;
+        --text: #061b31;
+        --soft: #50617a;
+        --muted: #64748d;
+        --brand: #533afd;
+        --brand-hover: #4032c8;
+        --radius-sm: 4px;
+        --radius-md: 6px;
+        --radius-card: 8px;
+        --radius-pill: 99999px;
+        --shadow-lg: 0 5px 20px -2px rgba(6, 27, 49, 0.06),
+          0 15px 40px -2px rgba(6, 27, 49, 0.06);
+        --shadow-xl: 0 10px 60px -16px rgba(6, 27, 49, 0.12),
+          0 20px 80px -16px rgba(6, 27, 49, 0.12);
+        --content: 1264px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        background: var(--bg);
+      }
+
+      body {
+        margin: 0;
+        font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont,
+          "Helvetica Neue", Arial, sans-serif;
+        color: var(--text);
+        background: var(--bg);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .shell {
+        overflow: clip;
+      }
+
+      .nav {
+        position: relative;
+        z-index: 4;
+        max-width: var(--content);
+        margin: 0 auto;
+        padding: 18px 24px;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+
+      .nav-logo {
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 1;
+        letter-spacing: -0.03em;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 24px;
+        color: var(--soft);
+        font-size: 12px;
+        line-height: 1;
+      }
+
+      .nav-actions {
+        margin-left: auto;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .ghost-link {
+        color: var(--text);
+        font-size: 12px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 20px 13px;
+        border-radius: var(--radius-sm);
+        font-size: 14px;
+        line-height: 1;
+        font-weight: 500;
+        transition: background-color 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+          border-color 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+          color 0.3s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s;
+      }
+
+      .button-primary {
+        color: #fff;
+        background: var(--brand);
+      }
+
+      .button-primary:hover {
+        background: var(--brand-hover);
+      }
+
+      .button-secondary {
+        color: var(--brand);
+        border: 1px solid rgba(83, 58, 253, 0.18);
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(8px);
+      }
+
+      .hero {
+        position: relative;
+        max-width: var(--content);
+        margin: 0 auto;
+        padding: 20px 24px 24px;
+        min-height: 620px;
+      }
+
+      .hero-grid {
+        position: relative;
+        z-index: 2;
+        max-width: 860px;
+        padding-top: 84px;
+      }
+
+      .eyebrow {
+        color: #7d8ba4;
+        font-size: 12px;
+        line-height: 1.4;
+        letter-spacing: 0.02em;
+        margin-bottom: 24px;
+      }
+
+      .hero h1 {
+        margin: 0;
+        font-size: clamp(48px, 5vw, 64px);
+        line-height: 1.03;
+        letter-spacing: -0.03em;
+        font-weight: 400;
+        max-width: 14ch;
+      }
+
+      .hero h1 .accent {
+        color: #665efd;
+      }
+
+      .hero h1 .accent-soft {
+        color: #8a73ff;
+      }
+
+      .hero-copy {
+        margin-top: 24px;
+        font-size: 18px;
+        line-height: 1.35;
+        color: var(--soft);
+        max-width: 34ch;
+      }
+
+      .cta-row {
+        margin-top: 28px;
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .hero-art {
+        position: absolute;
+        inset: -170px -96px auto auto;
+        width: min(55vw, 820px);
+        aspect-ratio: 0.84;
+        pointer-events: none;
+      }
+
+      .ribbon {
+        position: absolute;
+        border-radius: 999px;
+        filter: blur(0.4px);
+        transform-origin: center;
+      }
+
+      .ribbon.one {
+        width: 78%;
+        height: 152%;
+        top: -10%;
+        right: 10%;
+        transform: rotate(23deg);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 213, 82, 0.95) 0%,
+          rgba(255, 175, 45, 0.98) 18%,
+          rgba(253, 98, 82, 0.96) 42%,
+          rgba(240, 60, 164, 0.88) 68%,
+          rgba(178, 98, 249, 0.9) 100%
+        );
+        opacity: 0.92;
+      }
+
+      .ribbon.two {
+        width: 50%;
+        height: 146%;
+        top: -20%;
+        right: 34%;
+        transform: rotate(21deg);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.18) 0%,
+          rgba(183, 220, 255, 0.72) 24%,
+          rgba(102, 94, 253, 0.56) 68%,
+          rgba(255, 255, 255, 0.08) 100%
+        );
+        mix-blend-mode: screen;
+      }
+
+      .ribbon.three {
+        width: 42%;
+        height: 160%;
+        top: -12%;
+        right: -2%;
+        transform: rotate(26deg);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 228, 154, 0.95) 0%,
+          rgba(255, 144, 20, 0.9) 36%,
+          rgba(102, 94, 253, 0.88) 88%
+        );
+        opacity: 0.9;
+      }
+
+      .ribbon.glow {
+        width: 78%;
+        height: 70%;
+        top: 20%;
+        right: 0;
+        transform: rotate(20deg);
+        background: radial-gradient(
+          circle at center,
+          rgba(212, 135, 255, 0.46) 0%,
+          rgba(255, 255, 255, 0) 62%
+        );
+        filter: blur(24px);
+      }
+
+      .ribbon.four {
+        width: 26%;
+        height: 150%;
+        top: -24%;
+        right: 56%;
+        transform: rotate(16deg);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.85) 0%,
+          rgba(194, 228, 255, 0.95) 28%,
+          rgba(255, 255, 255, 0.15) 100%
+        );
+        mix-blend-mode: screen;
+      }
+
+      .logo-strip {
+        max-width: var(--content);
+        margin: 0 auto;
+        padding: 4px 24px 28px;
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 24px;
+        color: #1a2c44;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+      }
+
+      .section {
+        background: #fff;
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .section-inner {
+        max-width: var(--content);
+        margin: 0 auto;
+        padding: 42px 24px 112px;
+      }
+
+      .section-head {
+        max-width: 980px;
+        display: grid;
+        gap: 16px;
+        margin-bottom: 40px;
+      }
+
+      .section-head h2 {
+        margin: 0;
+        font-size: clamp(28px, 3.6vw, 40px);
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+        font-weight: 400;
+        max-width: 19ch;
+      }
+
+      .section-head p {
+        margin: 0;
+        font-size: 18px;
+        line-height: 1.4;
+        color: var(--soft);
+        max-width: 48ch;
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .feature-card {
+        position: relative;
+        min-height: 360px;
+        padding: 24px;
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-card);
+        box-shadow: 0 1px 2px rgba(6, 27, 49, 0.03),
+          0 12px 30px -18px rgba(6, 27, 49, 0.14);
+        overflow: hidden;
+      }
+
+      .feature-card::before {
+        content: "";
+        position: absolute;
+        inset: 0 0 auto;
+        height: 8px;
+        background: var(--card-accent, linear-gradient(90deg, #864cff, #5e4cfe));
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 4px 10px;
+        border-radius: var(--radius-pill);
+        font-size: 12px;
+        line-height: 1.25;
+        font-weight: 500;
+      }
+
+      .badge-purple {
+        color: #665efd;
+        background: #f0e8ff;
+      }
+
+      .badge-pink {
+        color: #ea2261;
+        background: #fee8eb;
+      }
+
+      .badge-gold {
+        color: #9b6829;
+        background: #fff2d8;
+      }
+
+      .feature-card h3 {
+        margin: 18px 0 10px;
+        font-size: 23px;
+        line-height: 1.14;
+        font-weight: 400;
+        letter-spacing: -0.02em;
+        max-width: 13ch;
+      }
+
+      .feature-card p {
+        margin: 0;
+        font-size: 15px;
+        line-height: 1.45;
+        color: var(--soft);
+        max-width: 28ch;
+      }
+
+      .feature-media {
+        position: absolute;
+        left: 24px;
+        right: 24px;
+        bottom: 24px;
+        height: 168px;
+        border-radius: 8px;
+        overflow: hidden;
+        background: linear-gradient(180deg, #ffffff, #f5f8ff);
+        border: 1px solid rgba(229, 237, 245, 0.9);
+      }
+
+      .media-screen {
+        position: absolute;
+        inset: 14px;
+        border-radius: 6px;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafd 100%);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      }
+
+      .media-bars,
+      .media-pie,
+      .media-flow,
+      .media-report,
+      .media-card,
+      .media-burst {
+        position: absolute;
+        inset: 22px;
+      }
+
+      .media-bars {
+        display: flex;
+        align-items: end;
+        gap: 10px;
+      }
+
+      .media-bars span {
+        flex: 1;
+        border-radius: 999px 999px 0 0;
+        background: linear-gradient(180deg, #d9f5fe 0%, #665efd 100%);
+      }
+
+      .media-bars span:nth-child(1) { height: 34%; }
+      .media-bars span:nth-child(2) { height: 58%; }
+      .media-bars span:nth-child(3) { height: 76%; }
+      .media-bars span:nth-child(4) { height: 48%; }
+      .media-bars span:nth-child(5) { height: 88%; }
+
+      .media-pie::before,
+      .media-pie::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .media-pie::before {
+        inset: 18px auto auto 18px;
+        width: 112px;
+        height: 112px;
+        background: conic-gradient(#f84c31, #f03ca4, #b262f9, #ffd552, #f84c31);
+      }
+
+      .media-pie::after {
+        inset: 44px auto auto 44px;
+        width: 60px;
+        height: 60px;
+        background: #fff;
+      }
+
+      .media-flow {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .flow-pill {
+        height: 18px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #f98bf9, #f96bee, #b262f9);
+        opacity: 0.95;
+      }
+
+      .flow-pill:nth-child(2) {
+        width: 78%;
+        background: linear-gradient(90deg, #ffd552, #ffaf2d, #ff9014);
+      }
+
+      .flow-pill:nth-child(3) {
+        width: 88%;
+        background: linear-gradient(90deg, #864cff, #5e4cfe, #564dfe);
+      }
+
+      .media-report {
+        display: grid;
+        grid-template-columns: 82px 1fr;
+        gap: 14px;
+        align-items: end;
+      }
+
+      .media-phone {
+        height: 112px;
+        border-radius: 18px;
+        background: linear-gradient(180deg, #ffffff, #eef4fb);
+        border: 1px solid rgba(6, 27, 49, 0.08);
+        box-shadow: 0 8px 18px -10px rgba(6, 27, 49, 0.22);
+      }
+
+      .media-chart {
+        height: 132px;
+        border-radius: 12px;
+        background: linear-gradient(180deg, #ffffff, #f7faff);
+        border: 1px solid rgba(229, 237, 245, 0.95);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .media-chart::before,
+      .media-chart::after {
+        content: "";
+        position: absolute;
+      }
+
+      .media-chart::before {
+        inset: 24px 18px 18px;
+        background:
+          linear-gradient(180deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.04))
+            0 22% / 100% 1px no-repeat,
+          linear-gradient(180deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.04))
+            0 52% / 100% 1px no-repeat,
+          linear-gradient(180deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.04))
+            0 82% / 100% 1px no-repeat;
+      }
+
+      .media-chart::after {
+        left: 22px;
+        right: 18px;
+        bottom: 18px;
+        height: 82px;
+        background:
+          linear-gradient(90deg, #d9eafb, #d9eafb) 0 100% / 16% 48% no-repeat,
+          linear-gradient(90deg, #c6d9ff, #c6d9ff) 21% 100% / 16% 64% no-repeat,
+          linear-gradient(90deg, #a8bfff, #a8bfff) 42% 100% / 16% 74% no-repeat,
+          linear-gradient(90deg, #7f7dfc, #7f7dfc) 63% 100% / 16% 84% no-repeat,
+          linear-gradient(90deg, #533afd, #533afd) 84% 100% / 16% 98% no-repeat;
+      }
+
+      .media-card::before,
+      .media-card::after,
+      .media-burst::before,
+      .media-burst::after {
+        content: "";
+        position: absolute;
+      }
+
+      .media-card::before {
+        inset: 10px auto auto 18px;
+        width: 120px;
+        height: 120px;
+        border-radius: 18px;
+        background: linear-gradient(180deg, #ffd978, #ff9f42 42%, #635bff 100%);
+        box-shadow: 0 18px 36px -18px rgba(6, 27, 49, 0.3);
+      }
+
+      .media-card::after {
+        inset: 20px 16px 18px auto;
+        width: 118px;
+        border-radius: 14px;
+        background:
+          linear-gradient(180deg, rgba(6, 27, 49, 0.06), rgba(6, 27, 49, 0.06))
+            16px 22px / 66px 6px no-repeat,
+          linear-gradient(90deg, #f98bf9, #b262f9) 16px 56px / 84px 10px no-repeat,
+          linear-gradient(90deg, #ffd552, #ff9014) 16px 78px / 58px 10px no-repeat,
+          linear-gradient(90deg, #864cff, #5e4cfe) 16px 100px / 74px 10px no-repeat,
+          linear-gradient(180deg, #fff, #f6f9fc);
+        border: 1px solid rgba(229, 237, 245, 0.95);
+      }
+
+      .media-burst::before {
+        inset: 8px 10px 6px 12px;
+        border-radius: 18px;
+        background:
+          radial-gradient(circle at 22% 34%, rgba(255, 89, 150, 0.55), transparent 20%),
+          radial-gradient(circle at 62% 22%, rgba(255, 175, 45, 0.6), transparent 18%),
+          radial-gradient(circle at 58% 72%, rgba(102, 94, 253, 0.5), transparent 24%),
+          radial-gradient(circle at 76% 54%, rgba(240, 60, 164, 0.45), transparent 18%),
+          linear-gradient(180deg, #fff, #f8fafd);
+        filter: saturate(1.1);
+      }
+
+      .media-burst::after {
+        inset: 18px 24px 26px 24px;
+        border-radius: 14px;
+        background:
+          linear-gradient(180deg, rgba(6, 27, 49, 0.06), rgba(6, 27, 49, 0.06))
+            18px 18px / 84px 6px no-repeat,
+          linear-gradient(180deg, rgba(6, 27, 49, 0.04), rgba(6, 27, 49, 0.04))
+            18px 34px / 68px 6px no-repeat,
+          linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.96));
+        border: 1px solid rgba(229, 237, 245, 0.95);
+        box-shadow: 0 12px 28px -18px rgba(6, 27, 49, 0.22);
+      }
+
+      .footer-cta {
+        max-width: var(--content);
+        margin: 0 auto;
+        padding: 84px 24px 96px;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 32px;
+        align-items: center;
+      }
+
+      .footer-cta-card {
+        padding: 32px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-card);
+        background: linear-gradient(180deg, #fff, #f8fafd);
+        box-shadow: var(--shadow-xl);
+      }
+
+      .footer-cta-card h2 {
+        margin: 0 0 14px;
+        font-size: clamp(30px, 4vw, 42px);
+        line-height: 1.08;
+        letter-spacing: -0.03em;
+        font-weight: 400;
+        max-width: 12ch;
+      }
+
+      .footer-cta-card p {
+        margin: 0 0 24px;
+        max-width: 34ch;
+        color: var(--soft);
+        font-size: 18px;
+        line-height: 1.45;
+      }
+
+      .mini-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .mini-tile {
+        padding: 20px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-card);
+        background: #fff;
+      }
+
+      .mini-tile strong {
+        display: block;
+        font-size: 14px;
+        line-height: 1.3;
+        color: var(--muted);
+        margin-bottom: 12px;
+      }
+
+      .mini-tile span {
+        display: block;
+        font-size: 24px;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+      }
+
+      @media (max-width: 980px) {
+        .feature-grid,
+        .footer-cta {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          min-height: auto;
+          padding-bottom: 40px;
+        }
+
+        .hero-art {
+          position: relative;
+          inset: auto;
+          width: 100%;
+          max-width: 520px;
+          margin: 32px auto 0;
+          height: 420px;
+        }
+
+        .logo-strip {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 720px) {
+        .nav {
+          flex-wrap: wrap;
+        }
+
+        .nav-links {
+          order: 3;
+          width: 100%;
+          overflow: auto;
+          padding-bottom: 4px;
+        }
+
+        .hero-grid {
+          padding-top: 28px;
+        }
+
+        .hero-copy {
+          font-size: 18px;
+        }
+
+        .section-inner,
+        .footer-cta {
+          padding-top: 56px;
+          padding-bottom: 72px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header class="nav">
+        <div class="nav-logo">helix</div>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="#products">Products</a>
+          <a href="#platform">Platform</a>
+          <a href="#developers">Developers</a>
+          <a href="#pricing">Pricing</a>
+        </nav>
+        <div class="nav-actions">
+          <a class="ghost-link" href="#signin">Sign in</a>
+          <a class="button button-primary" href="#start">Start now</a>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="hero-grid">
+            <div class="eyebrow">Unified commerce rails for AI-native teams</div>
+            <h1>
+              Launch financial operations
+              <span class="accent">without rebuilding</span>
+              your product shell for growth.
+            </h1>
+            <p class="hero-copy">
+              Accept payments, automate billing, route payouts, and surface revenue
+              signals in one calm interface designed for high-growth software teams.
+            </p>
+            <div class="cta-row">
+              <a class="button button-primary" href="#start">Get started</a>
+              <a class="button button-secondary" href="#tour">Talk to sales</a>
+            </div>
+          </div>
+
+          <div class="hero-art" aria-hidden="true">
+            <div class="ribbon glow"></div>
+            <div class="ribbon four"></div>
+            <div class="ribbon one"></div>
+            <div class="ribbon two"></div>
+            <div class="ribbon three"></div>
+          </div>
+        </section>
+
+        <section class="logo-strip" aria-label="Trusted by">
+          <span>ANTHEMIC</span>
+          <span>LIGHTSPEED</span>
+          <span>CURSORLAB</span>
+          <span>OPENGRID</span>
+          <span>AMAZONIC</span>
+        </section>
+
+        <section class="section" id="products">
+          <div class="section-inner">
+            <div class="section-head">
+              <h2>
+                Flexible operating rails for products that sell globally and ship
+                quickly.
+              </h2>
+              <p>
+                Three modules to test the Stripe-style layout system: neutral cards,
+                restrained copy, product-colored accents, and illustration-led media.
+              </p>
+            </div>
+
+            <div class="feature-grid">
+              <article
+                class="feature-card"
+                style="--card-accent: linear-gradient(90deg, #864cff, #5e4cfe, #564dfe);"
+              >
+                <span class="badge badge-purple">Billing</span>
+                <h3>Automate invoicing and recurring plans from one ledger.</h3>
+                <p>
+                  Replace one-off payment plumbing with a calmer system for upgrades,
+                  renewals, taxes, and account controls.
+                </p>
+                <div class="feature-media">
+                  <div class="media-screen">
+                    <div class="media-bars">
+                      <span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article
+                class="feature-card"
+                style="--card-accent: linear-gradient(90deg, #f84c31, #ea2261, #f03ca4);"
+              >
+                <span class="badge badge-pink">Connect</span>
+                <h3>Route payouts, partner revenue, and marketplace balances.</h3>
+                <p>
+                  Give operations teams better visibility into transfers, margins,
+                  reconciliation, and partner performance.
+                </p>
+                <div class="feature-media">
+                  <div class="media-screen">
+                    <div class="media-pie"></div>
+                  </div>
+                </div>
+              </article>
+
+              <article
+                class="feature-card"
+                style="--card-accent: linear-gradient(90deg, #ffd552, #ffaf2d, #ff9014);"
+              >
+                <span class="badge badge-gold">Revenue</span>
+                <h3>Turn payment events into forecasting signals your team can act on.</h3>
+                <p>
+                  Build reporting flows that surface cash movement, risk, and
+                  subscription health without adding dashboard clutter.
+                </p>
+                <div class="feature-media">
+                  <div class="media-screen">
+                    <div class="media-flow">
+                      <div class="flow-pill"></div>
+                      <div class="flow-pill"></div>
+                      <div class="flow-pill"></div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article
+                class="feature-card"
+                style="--card-accent: linear-gradient(90deg, #ffd552, #ffaf2d, #fd6252);"
+              >
+                <span class="badge badge-gold">Checkout</span>
+                <h3>Launch conversion flows that feel native across every surface.</h3>
+                <p>
+                  Keep experimentation fast while preserving a clear, branded payment
+                  experience from landing page to confirmation.
+                </p>
+                <div class="feature-media">
+                  <div class="media-screen">
+                    <div class="media-report">
+                      <div class="media-phone"></div>
+                      <div class="media-chart"></div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article
+                class="feature-card"
+                style="--card-accent: linear-gradient(90deg, #f98bf9, #f96bee, #564dfe);"
+              >
+                <span class="badge badge-purple">Issuing</span>
+                <h3>Create controlled spend programs for teams, vendors, and agents.</h3>
+                <p>
+                  Design cards, budgets, and approval states that fit your product
+                  without introducing operational noise.
+                </p>
+                <div class="feature-media">
+                  <div class="media-screen">
+                    <div class="media-card"></div>
+                  </div>
+                </div>
+              </article>
+
+              <article
+                class="feature-card"
+                style="--card-accent: linear-gradient(90deg, #f84c31, #f03ca4, #b262f9);"
+              >
+                <span class="badge badge-pink">Treasury</span>
+                <h3>Make cross-border money movement visible before it becomes risk.</h3>
+                <p>
+                  Combine balances, routing, and transfer behavior into one readable
+                  layer for finance and product operations.
+                </p>
+                <div class="feature-media">
+                  <div class="media-screen">
+                    <div class="media-burst"></div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="footer-cta" id="start">
+          <div class="footer-cta-card">
+            <h2>Build original product pages in the same visual language.</h2>
+            <p>
+              This demo keeps Stripe's visual grammar but swaps in new content,
+              modules, and business framing so it reads as validation, not a clone.
+            </p>
+            <a class="button button-primary" href="#tour">See the system</a>
+          </div>
+
+          <div class="mini-grid">
+            <div class="mini-tile">
+              <strong>Grid</strong>
+              <span>4 / 8 / 12 columns</span>
+            </div>
+            <div class="mini-tile">
+              <strong>Primary action</strong>
+              <span>#533AFD</span>
+            </div>
+            <div class="mini-tile">
+              <strong>Surface radius</strong>
+              <span>6px to 8px</span>
+            </div>
+            <div class="mini-tile">
+              <strong>Core rule</strong>
+              <span>Neutral base, vivid accents</span>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
