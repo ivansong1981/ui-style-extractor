@@ -240,6 +240,9 @@
 
       .quiet-button,
       .primary-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         height: 40px;
         border: 0;
         border-radius: 999px;
@@ -984,18 +987,18 @@
 
         <div class="nav-group">
           <p class="nav-label">Core</p>
-          <a class="nav-item active" href="#overview"><span class="nav-bullet"></span>Overview</a>
-          <a class="nav-item" href="#payments"><span class="nav-bullet"></span>Payments</a>
-          <a class="nav-item" href="#payouts"><span class="nav-bullet"></span>Payouts</a>
-          <a class="nav-item" href="#reports"><span class="nav-bullet"></span>Reports</a>
+          <a class="nav-item active" href="./app-demo.html"><span class="nav-bullet"></span>Overview</a>
+          <a class="nav-item" href="./app-detail-demo.html"><span class="nav-bullet"></span>Payments</a>
+          <a class="nav-item" href="./app-detail-demo.html"><span class="nav-bullet"></span>Payouts</a>
+          <a class="nav-item" href="./app-settings-demo.html"><span class="nav-bullet"></span>Policies</a>
         </div>
 
         <div class="nav-group">
           <p class="nav-label">Operations</p>
-          <a class="nav-item" href="#risk"><span class="nav-bullet"></span>Risk review</a>
-          <a class="nav-item" href="#recon"><span class="nav-bullet"></span>Reconciliation</a>
-          <a class="nav-item" href="#team"><span class="nav-bullet"></span>Team approvals</a>
-          <a class="nav-item" href="#settings"><span class="nav-bullet"></span>Settings</a>
+          <a class="nav-item" href="./app-detail-demo.html"><span class="nav-bullet"></span>Risk review</a>
+          <a class="nav-item" href="./app-detail-demo.html"><span class="nav-bullet"></span>Reconciliation</a>
+          <a class="nav-item" href="./app-settings-demo.html"><span class="nav-bullet"></span>Team approvals</a>
+          <a class="nav-item" href="./app-settings-demo.html"><span class="nav-bullet"></span>Settings</a>
         </div>
 
         <div class="sidebar-card">
@@ -1033,8 +1036,8 @@
             </p>
 
             <div class="hero-actions">
-              <button class="primary-button" type="button">Review risk queue</button>
-              <button class="quiet-button" type="button">Open transaction ledger</button>
+              <a class="primary-button" href="./app-detail-demo.html">Review risk queue</a>
+              <a class="quiet-button" href="./app-detail-demo.html">Open transaction ledger</a>
             </div>
 
             <div class="hero-stat-grid">

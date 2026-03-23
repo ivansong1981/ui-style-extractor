@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stripe App Settings Validation Demo</title>
+    <meta
+      name="description"
+      content="A Stripe-style settings and approvals screen derived from the app UI adaptation guide."
+    />
+    <style>
+      :root {
+        --app-bg: #f8fafd;
+        --app-surface: #ffffff;
+        --app-surface-subtle: #f8fafd;
+        --app-border: #e5edf5;
+        --app-text: #061b31;
+        --app-text-soft: #50617a;
+        --app-text-muted: #64748d;
+        --app-brand: #533afd;
+        --app-brand-hover: #4032c8;
+        --app-focus: #9a9afe;
+        --app-success: #00b261;
+        --app-error: #f3432a;
+        --app-warning: #f9b900;
+        --app-radius-control: 4px;
+        --app-radius-panel: 6px;
+        --app-radius-soft: 8px;
+        --app-shadow-panel: 0 4px 8px 0 rgba(6, 27, 49, 0.06),
+          0 6px 22px 0 rgba(6, 27, 49, 0.08);
+        --app-shadow-overlay: 0 10px 60px -16px rgba(6, 27, 49, 0.12),
+          0 20px 80px -16px rgba(6, 27, 49, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafd 22%, #f4f8fc 100%);
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont,
+          "Helvetica Neue", Arial, sans-serif;
+        color: var(--app-text);
+        background:
+          radial-gradient(circle at top right, rgba(185, 185, 249, 0.18), transparent 24%),
+          linear-gradient(180deg, #ffffff 0%, #f8fafd 24%, #f4f8fc 100%);
+      }
+
+      button,
+      input {
+        font: inherit;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .app-shell {
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: 264px minmax(0, 1fr);
+      }
+
+      .sidebar {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        padding: 22px 18px 18px;
+        background: rgba(248, 250, 253, 0.86);
+        border-right: 1px solid rgba(229, 237, 245, 0.92);
+        backdrop-filter: blur(14px);
+      }
+
+      .brand-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 28px;
+      }
+
+      .brand-mark {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 15px;
+        font-weight: 500;
+        letter-spacing: -0.03em;
+      }
+
+      .brand-glyph {
+        width: 30px;
+        height: 30px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #864cff, #5e4cfe, #564dfe);
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28);
+      }
+
+      .workspace-chip {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(83, 58, 253, 0.08);
+        color: var(--app-brand);
+        font-size: 12px;
+        font-weight: 500;
+      }
+
+      .nav-group {
+        display: grid;
+        gap: 6px;
+        margin-bottom: 22px;
+      }
+
+      .nav-label {
+        margin: 0 10px 8px;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--app-text-muted);
+      }
+
+      .nav-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 12px;
+        border-radius: 12px;
+        color: var(--app-text-soft);
+        font-size: 14px;
+        line-height: 1.2;
+        transition: background-color 240ms cubic-bezier(0.25, 1, 0.5, 1),
+          color 240ms cubic-bezier(0.25, 1, 0.5, 1);
+      }
+
+      .nav-item:hover {
+        background: rgba(255, 255, 255, 0.84);
+        color: var(--app-text);
+      }
+
+      .nav-item.active {
+        background: linear-gradient(
+          90deg,
+          rgba(83, 58, 253, 0.12),
+          rgba(185, 185, 249, 0.12)
+        );
+        color: var(--app-text);
+        box-shadow: inset 3px 0 0 0 var(--app-brand);
+      }
+
+      .nav-bullet {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: currentColor;
+        opacity: 0.88;
+      }
+
+      .sidebar-card {
+        margin-top: 26px;
+        padding: 18px;
+        border: 1px solid var(--app-border);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.88);
+        box-shadow: var(--app-shadow-panel);
+      }
+
+      .sidebar-card h3,
+      .sidebar-card p {
+        margin: 0;
+      }
+
+      .sidebar-card h3 {
+        font-size: 15px;
+        line-height: 1.3;
+        font-weight: 400;
+      }
+
+      .sidebar-card p {
+        margin-top: 8px;
+        font-size: 13px;
+        line-height: 1.5;
+        color: var(--app-text-soft);
+      }
+
+      .main {
+        min-width: 0;
+        padding: 18px 24px 28px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 8px 0 18px;
+      }
+
+      .search {
+        flex: 1 1 auto;
+        min-width: 180px;
+        height: 44px;
+        border: 1px solid var(--app-border);
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.84);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        padding: 0 16px;
+        color: var(--app-text);
+      }
+
+      .topbar-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .quiet-button,
+      .primary-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+        border-radius: 999px;
+        padding: 0 18px;
+        cursor: pointer;
+        transition: background-color 0.24s cubic-bezier(0.25, 1, 0.5, 1),
+          transform 0.24s cubic-bezier(0.25, 1, 0.5, 1);
+      }
+
+      .quiet-button {
+        background: rgba(255, 255, 255, 0.84);
+        border: 1px solid var(--app-border);
+        color: var(--app-text);
+      }
+
+      .primary-button {
+        border: 0;
+        background: var(--app-brand);
+        color: #ffffff;
+        box-shadow: 0 10px 30px -18px rgba(83, 58, 253, 0.66);
+      }
+
+      .quiet-button:hover,
+      .primary-button:hover {
+        transform: translateY(-1px);
+      }
+
+      .primary-button:hover {
+        background: var(--app-brand-hover);
+      }
+
+      .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 999px;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, #0a2540, #4032c8);
+        color: #ffffff;
+        font-size: 13px;
+        font-weight: 500;
+      }
+
+      .case-hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.45fr) minmax(300px, 0.72fr);
+        gap: 16px;
+        margin-bottom: 16px;
+      }
+
+      .hero-main,
+      .hero-side {
+        border: 1px solid rgba(229, 237, 245, 0.92);
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.94);
+        box-shadow: var(--app-shadow-panel);
+      }
+
+      .hero-main {
+        padding: 24px;
+        background:
+          radial-gradient(circle at top right, rgba(185, 185, 249, 0.18), transparent 24%),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 253, 0.98));
+      }
+
+      .breadcrumbs {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        color: var(--app-text-muted);
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 16px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(83, 58, 253, 0.08);
+        color: var(--app-brand);
+        font-size: 12px;
+        font-weight: 500;
+      }
+
+      .hero-main h1 {
+        margin: 16px 0 10px;
+        font-size: clamp(30px, 3vw, 40px);
+        line-height: 1.04;
+        letter-spacing: -0.04em;
+        font-weight: 400;
+        max-width: 12ch;
+      }
+
+      .hero-main p {
+        margin: 0;
+        max-width: 60ch;
+        font-size: 15px;
+        line-height: 1.55;
+        color: var(--app-text-soft);
+      }
+
+      .badge-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 18px;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        line-height: 1.2;
+        font-weight: 500;
+      }
+
+      .badge-brand {
+        background: rgba(83, 58, 253, 0.1);
+        color: var(--app-brand);
+      }
+
+      .badge-warning {
+        background: rgba(255, 213, 82, 0.22);
+        color: #bd7a09;
+      }
+
+      .badge-success {
+        background: rgba(0, 178, 97, 0.12);
+        color: var(--app-success);
+      }
+
+      .badge-danger {
+        background: rgba(243, 67, 42, 0.12);
+        color: var(--app-error);
+      }
+
+      .hero-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 22px;
+      }
+
+      .hero-metrics {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 24px;
+      }
+
+      .mini-card {
+        padding: 16px;
+        border-radius: 18px;
+        border: 1px solid var(--app-border);
+        background: rgba(255, 255, 255, 0.84);
+      }
+
+      .mini-card span {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 12px;
+        color: var(--app-text-muted);
+      }
+
+      .mini-card strong {
+        font-size: 24px;
+        line-height: 1;
+        letter-spacing: -0.04em;
+        font-weight: 400;
+      }
+
+      .hero-side {
+        padding: 22px;
+        background:
+          radial-gradient(circle at bottom right, rgba(255, 213, 82, 0.2), transparent 34%),
+          linear-gradient(180deg, #0d1f38, #112640);
+        color: #ffffff;
+      }
+
+      .side-kicker {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.72);
+      }
+
+      .side-value {
+        margin-top: 18px;
+        font-size: 50px;
+        line-height: 0.94;
+        letter-spacing: -0.05em;
+        font-weight: 400;
+      }
+
+      .side-copy {
+        margin-top: 10px;
+        font-size: 14px;
+        line-height: 1.5;
+        color: rgba(255, 255, 255, 0.76);
+      }
+
+      .meter {
+        margin-top: 18px;
+        height: 10px;
+        border-radius: 999px;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      .meter span {
+        display: block;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(
+          270deg,
+          #0073e6 4.91%,
+          #16cbe1 21.6%,
+          #48a4ed 40.82%,
+          #635bff 60.04%,
+          #9966ff 80.27%,
+          #d187ff 96.97%
+        );
+      }
+
+      .hero-side-grid {
+        display: grid;
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .hero-side-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .hero-side-row strong {
+        color: #ffffff;
+        font-weight: 400;
+      }
+
+      .content-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.9fr);
+        gap: 16px;
+      }
+
+      .stack {
+        display: grid;
+        gap: 16px;
+      }
+
+      .panel {
+        border: 1px solid var(--app-border);
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.92);
+        box-shadow: var(--app-shadow-panel);
+      }
+
+      .panel-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 22px 24px 18px;
+      }
+
+      .panel-header h2,
+      .panel-header h3 {
+        margin: 0;
+        font-size: 18px;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        font-weight: 400;
+      }
+
+      .panel-subtext {
+        margin: 6px 0 0;
+        font-size: 13px;
+        color: var(--app-text-soft);
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        padding: 0 24px 24px;
+      }
+
+      .field {
+        padding: 18px;
+        border-radius: 18px;
+        border: 1px solid var(--app-border);
+        background: linear-gradient(180deg, #ffffff, #fbfcfe);
+      }
+
+      .field.span-2 {
+        grid-column: 1 / -1;
+      }
+
+      .field-label {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 12px;
+        color: var(--app-text-muted);
+      }
+
+      .control {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 0 14px;
+        border-radius: 14px;
+        border: 1px solid var(--app-border);
+        background: rgba(248, 250, 253, 0.92);
+        font-size: 14px;
+        color: var(--app-text);
+      }
+
+      .control strong {
+        font-weight: 400;
+      }
+
+      .caret {
+        width: 10px;
+        height: 10px;
+        border-right: 1.5px solid var(--app-text-muted);
+        border-bottom: 1.5px solid var(--app-text-muted);
+        transform: rotate(45deg) translateY(-2px);
+        flex: 0 0 auto;
+      }
+
+      .field-help {
+        margin: 10px 0 0;
+        font-size: 12px;
+        line-height: 1.5;
+        color: var(--app-text-muted);
+      }
+
+      .pill-group {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 34px;
+        padding: 0 12px;
+        border-radius: 999px;
+        border: 1px solid var(--app-border);
+        background: #ffffff;
+        color: var(--app-text-soft);
+        font-size: 12px;
+      }
+
+      .pill.active {
+        background: rgba(83, 58, 253, 0.12);
+        border-color: rgba(83, 58, 253, 0.18);
+        color: var(--app-brand);
+      }
+
+      .toggle-list {
+        display: grid;
+        gap: 10px;
+        padding: 0 24px 24px;
+      }
+
+      .toggle-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 16px 18px;
+        border-radius: 18px;
+        border: 1px solid var(--app-border);
+        background: #ffffff;
+      }
+
+      .toggle-row strong,
+      .toggle-row p {
+        margin: 0;
+      }
+
+      .toggle-row strong {
+        display: block;
+        font-size: 14px;
+        font-weight: 400;
+      }
+
+      .toggle-row p {
+        margin-top: 4px;
+        font-size: 12px;
+        line-height: 1.5;
+        color: var(--app-text-muted);
+      }
+
+      .switch {
+        position: relative;
+        width: 48px;
+        height: 28px;
+        border-radius: 999px;
+        background: #dce6f0;
+        box-shadow: inset 0 0 0 1px rgba(6, 27, 49, 0.06);
+        flex: 0 0 auto;
+      }
+
+      .switch span {
+        position: absolute;
+        top: 3px;
+        left: 4px;
+        width: 22px;
+        height: 22px;
+        border-radius: 999px;
+        background: #ffffff;
+        box-shadow: 0 4px 8px rgba(6, 27, 49, 0.15);
+      }
+
+      .switch.on {
+        background: rgba(83, 58, 253, 0.26);
+        box-shadow: inset 0 0 0 1px rgba(83, 58, 253, 0.16);
+      }
+
+      .switch.on span {
+        left: 22px;
+      }
+
+      .callout {
+        margin: 0 24px 24px;
+        padding: 18px;
+        border-radius: 18px;
+        border: 1px solid rgba(255, 213, 82, 0.4);
+        background:
+          radial-gradient(circle at right top, rgba(255, 213, 82, 0.18), transparent 42%),
+          linear-gradient(180deg, #fffdfa, #fffaf2);
+      }
+
+      .callout h4,
+      .callout p {
+        margin: 0;
+      }
+
+      .callout h4 {
+        font-size: 15px;
+        font-weight: 400;
+      }
+
+      .callout p {
+        margin-top: 8px;
+        font-size: 13px;
+        line-height: 1.55;
+        color: var(--app-text-soft);
+      }
+
+      .approval-list {
+        display: grid;
+        gap: 10px;
+        padding: 0 24px 24px;
+      }
+
+      .approval-card {
+        padding: 18px;
+        border-radius: 18px;
+        border: 1px solid var(--app-border);
+        background: linear-gradient(180deg, #ffffff, #fbfcfe);
+      }
+
+      .approval-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .approval-card h4,
+      .approval-card p {
+        margin: 0;
+      }
+
+      .approval-card h4 {
+        font-size: 15px;
+        font-weight: 400;
+      }
+
+      .approval-card p {
+        margin-top: 8px;
+        font-size: 13px;
+        line-height: 1.55;
+        color: var(--app-text-soft);
+      }
+
+      .approval-meta {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 12px;
+      }
+
+      .table-wrap {
+        padding: 0 24px 24px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        border: 1px solid var(--app-border);
+        border-radius: 18px;
+        overflow: hidden;
+        background: #ffffff;
+      }
+
+      thead th {
+        text-align: left;
+        padding: 14px 18px;
+        background: #fbfcfe;
+        border-bottom: 1px solid var(--app-border);
+        font-size: 12px;
+        color: var(--app-text-muted);
+        font-weight: 500;
+      }
+
+      tbody td {
+        padding: 16px 18px;
+        border-bottom: 1px solid var(--app-border);
+        font-size: 14px;
+        line-height: 1.4;
+      }
+
+      tbody tr:last-child td {
+        border-bottom: 0;
+      }
+
+      .subline {
+        display: block;
+        margin-top: 4px;
+        font-size: 12px;
+        color: var(--app-text-muted);
+      }
+
+      .detail-card {
+        margin: 0 24px 24px;
+        padding: 20px;
+        border-radius: 18px;
+        border: 1px solid var(--app-border);
+        background: linear-gradient(180deg, #ffffff, #fbfcfe);
+      }
+
+      .detail-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 12px 0;
+        border-top: 1px solid var(--app-border);
+        font-size: 13px;
+        color: var(--app-text-soft);
+      }
+
+      .detail-row:first-child {
+        border-top: 0;
+        padding-top: 0;
+      }
+
+      .detail-row strong {
+        color: var(--app-text);
+        font-weight: 400;
+      }
+
+      .member-list {
+        display: grid;
+        gap: 10px;
+        padding: 0 24px 24px;
+      }
+
+      .member-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 14px 16px;
+        border-radius: 16px;
+        border: 1px solid var(--app-border);
+        background: #ffffff;
+      }
+
+      .member-meta {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+      }
+
+      .member-avatar {
+        width: 38px;
+        height: 38px;
+        border-radius: 999px;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, #0a2540, #4032c8);
+        color: #ffffff;
+        font-size: 13px;
+        font-weight: 500;
+        flex: 0 0 auto;
+      }
+
+      .member-row strong,
+      .member-row p {
+        margin: 0;
+      }
+
+      .member-row strong {
+        display: block;
+        font-size: 14px;
+        font-weight: 400;
+      }
+
+      .member-row p {
+        margin-top: 4px;
+        font-size: 12px;
+        line-height: 1.45;
+        color: var(--app-text-muted);
+      }
+
+      .note-card {
+        margin: 0 24px 24px;
+        padding: 18px;
+        border-radius: 18px;
+        border: 1px solid rgba(83, 58, 253, 0.18);
+        background:
+          radial-gradient(circle at top right, rgba(185, 185, 249, 0.14), transparent 36%),
+          linear-gradient(180deg, #ffffff, #f9f8ff);
+      }
+
+      .note-card h4,
+      .note-card p {
+        margin: 0;
+      }
+
+      .note-card h4 {
+        font-size: 15px;
+        font-weight: 400;
+      }
+
+      .note-card p {
+        margin-top: 8px;
+        font-size: 13px;
+        line-height: 1.55;
+        color: var(--app-text-soft);
+      }
+
+      .footer-strip {
+        margin-top: 16px;
+        padding: 18px 24px 0;
+        font-size: 12px;
+        color: var(--app-text-muted);
+      }
+
+      @media (max-width: 1180px) {
+        .case-hero,
+        .content-grid,
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 960px) {
+        .app-shell {
+          grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+          position: relative;
+          height: auto;
+          border-right: 0;
+          border-bottom: 1px solid var(--app-border);
+        }
+
+        .main {
+          padding: 16px;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .topbar {
+          flex-wrap: wrap;
+        }
+
+        .topbar-actions {
+          width: 100%;
+          justify-content: space-between;
+        }
+
+        .hero-metrics {
+          grid-template-columns: 1fr;
+        }
+
+        .panel-header,
+        .form-grid,
+        .toggle-list,
+        .approval-list,
+        .table-wrap,
+        .member-list,
+        .footer-strip {
+          padding-left: 18px;
+          padding-right: 18px;
+        }
+
+        .callout,
+        .detail-card,
+        .note-card {
+          margin-left: 18px;
+          margin-right: 18px;
+        }
+
+        table,
+        thead,
+        tbody,
+        th,
+        td,
+        tr {
+          display: block;
+        }
+
+        thead {
+          display: none;
+        }
+
+        tbody td {
+          padding: 8px 0;
+          border-bottom: 0;
+        }
+
+        tbody tr {
+          padding: 12px 0;
+          border-bottom: 1px solid var(--app-border);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-row">
+          <div class="brand-mark">
+            <span class="brand-glyph" aria-hidden="true"></span>
+            <span>Stripe Ops</span>
+          </div>
+          <span class="workspace-chip">Live</span>
+        </div>
+
+        <div class="nav-group">
+          <p class="nav-label">Core</p>
+          <a class="nav-item" href="./app-demo.html"><span class="nav-bullet"></span>Overview</a>
+          <a class="nav-item" href="./app-detail-demo.html"><span class="nav-bullet"></span>Payments</a>
+          <a class="nav-item" href="./app-detail-demo.html"><span class="nav-bullet"></span>Payouts</a>
+          <a class="nav-item active" href="./app-settings-demo.html"><span class="nav-bullet"></span>Policies</a>
+        </div>
+
+        <div class="nav-group">
+          <p class="nav-label">Operations</p>
+          <a class="nav-item" href="./app-detail-demo.html"><span class="nav-bullet"></span>Risk review</a>
+          <a class="nav-item" href="./app-detail-demo.html"><span class="nav-bullet"></span>Reconciliation</a>
+          <a class="nav-item" href="./app-settings-demo.html"><span class="nav-bullet"></span>Team approvals</a>
+          <a class="nav-item active" href="./app-settings-demo.html"><span class="nav-bullet"></span>Settings</a>
+        </div>
+
+        <div class="sidebar-card">
+          <h3>Policy drift watch</h3>
+          <p>
+            Two approval rules changed this week. Keep the settings surface quiet and
+            reviewable so operators can ship updates without second-guessing the system.
+          </p>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <input
+            class="search"
+            type="text"
+            value="Search policy names, approvers, audit events"
+            aria-label="Search"
+          />
+          <div class="topbar-actions">
+            <a class="quiet-button" href="./app-demo.html">Back to overview</a>
+            <a class="quiet-button" href="./app-detail-demo.html">Open payout case</a>
+            <button class="primary-button" type="button">Save changes</button>
+            <div class="avatar" aria-hidden="true">IS</div>
+          </div>
+        </header>
+
+        <section class="case-hero">
+          <div class="hero-main">
+            <div class="breadcrumbs">
+              <span>Settings</span>
+              <span>/</span>
+              <span>Revenue ops</span>
+              <span>/</span>
+              <span>Workspace defaults</span>
+            </div>
+            <span class="eyebrow">Settings and approval pattern</span>
+            <h1>Tune payout controls without breaking the calm system.</h1>
+            <p>
+              A Stripe-style settings view should become even more restrained than the
+              dashboard. This proof extends the same token layer into forms, approvals,
+              toggles, and audit-friendly configuration surfaces.
+            </p>
+
+            <div class="badge-row">
+              <span class="badge badge-brand">Derived from website tokens</span>
+              <span class="badge badge-success">Draft policy ready</span>
+              <span class="badge badge-warning">2 approvals pending</span>
+            </div>
+
+            <div class="hero-actions">
+              <button class="quiet-button" type="button">Preview rollout</button>
+              <button class="quiet-button" type="button">Request security review</button>
+            </div>
+
+            <div class="hero-metrics">
+              <div class="mini-card">
+                <span>Active policies</span>
+                <strong>12</strong>
+              </div>
+              <div class="mini-card">
+                <span>Approval groups</span>
+                <strong>4</strong>
+              </div>
+              <div class="mini-card">
+                <span>Drift alerts</span>
+                <strong>2</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-side">
+            <div class="side-kicker">
+              <span>Config health</span>
+              <span>Synced 6m ago</span>
+            </div>
+            <div class="side-value">91</div>
+            <p class="side-copy">
+              The settings page stays almost monochrome until focus, save, warning, or
+              approval states need to speak up.
+            </p>
+            <div class="meter"><span style="width: 82%"></span></div>
+            <div class="hero-side-grid">
+              <div class="hero-side-row">
+                <span>Pending approvals</span>
+                <strong>2</strong>
+              </div>
+              <div class="hero-side-row">
+                <span>Sensitive fields</span>
+                <strong>6 tracked</strong>
+              </div>
+              <div class="hero-side-row">
+                <span>Next audit export</span>
+                <strong>18:30 UTC</strong>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="content-grid">
+          <div class="stack">
+            <section class="panel">
+              <div class="panel-header">
+                <div>
+                  <h2>Workspace controls</h2>
+                  <p class="panel-subtext">
+                    Form fields, segmented choices, and toggles adapted from the same
+                    Stripe token discipline.
+                  </p>
+                </div>
+                <span class="badge badge-success">Draft ready</span>
+              </div>
+
+              <div class="form-grid">
+                <article class="field">
+                  <span class="field-label">Default payout schedule</span>
+                  <div class="control">
+                    <strong>Daily settlement at 18:30 UTC</strong>
+                    <span class="caret" aria-hidden="true"></span>
+                  </div>
+                  <p class="field-help">Quiet controls with minimal chrome and exact spacing.</p>
+                </article>
+
+                <article class="field">
+                  <span class="field-label">Manual review threshold</span>
+                  <div class="control">
+                    <strong>$50,000 and above</strong>
+                    <span class="caret" aria-hidden="true"></span>
+                  </div>
+                  <p class="field-help">Brand tint stays reserved for focus, primary save, and selected pills.</p>
+                </article>
+
+                <article class="field">
+                  <span class="field-label">Statement descriptor</span>
+                  <div class="control">
+                    <strong>STRIPE OPS</strong>
+                  </div>
+                  <p class="field-help">Uppercase machine-like values can inherit the same calm typography stack.</p>
+                </article>
+
+                <article class="field">
+                  <span class="field-label">Escalation channel</span>
+                  <div class="control">
+                    <strong>Revenue ops + finance lead</strong>
+                    <span class="caret" aria-hidden="true"></span>
+                  </div>
+                  <p class="field-help">Supporting metadata stays muted so the control value remains primary.</p>
+                </article>
+
+                <article class="field span-2">
+                  <span class="field-label">Dispute write-off mode</span>
+                  <div class="pill-group" aria-hidden="true">
+                    <span class="pill active">Require approval</span>
+                    <span class="pill">Queue review</span>
+                    <span class="pill">Auto reject</span>
+                  </div>
+                  <p class="field-help">
+                    This shows how app-level selections can remain Stripe-like without turning into a generic SaaS toggle bar.
+                  </p>
+                </article>
+              </div>
+
+              <div class="toggle-list">
+                <div class="toggle-row">
+                  <div>
+                    <strong>Require dual approval for payout overrides</strong>
+                    <p>Large threshold changes should stay explicit, reviewable, and reversible.</p>
+                  </div>
+                  <span class="switch on" aria-hidden="true"><span></span></span>
+                </div>
+
+                <div class="toggle-row">
+                  <div>
+                    <strong>Route chargeback spikes into the risk queue</strong>
+                    <p>Carry the same operational workflow language from the dashboard into settings.</p>
+                  </div>
+                  <span class="switch on" aria-hidden="true"><span></span></span>
+                </div>
+
+                <div class="toggle-row">
+                  <div>
+                    <strong>Allow self-serve changes during payout windows</strong>
+                    <p>Keep destructive or high-risk changes guarded even when the visual system stays quiet.</p>
+                  </div>
+                  <span class="switch" aria-hidden="true"><span></span></span>
+                </div>
+              </div>
+
+              <div class="callout">
+                <h4>Why this screen matters</h4>
+                <p>
+                  The app continuation is more credible once it handles settings and approval surfaces, not only dashboards.
+                  This is where weak adaptations usually collapse into generic admin UI. Stripe's neutral-first rhythm and
+                  exact borders still carry the page.
+                </p>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-header">
+                <div>
+                  <h3>Approval routing</h3>
+                  <p class="panel-subtext">Original workflow content presented through quiet product cards.</p>
+                </div>
+                <span class="badge badge-warning">2 waiting</span>
+              </div>
+
+              <div class="approval-list">
+                <article class="approval-card">
+                  <div class="approval-head">
+                    <div>
+                      <h4>Payout override above $75K</h4>
+                      <p>Finance signs first, then revenue ops confirms the release window and account cohort.</p>
+                    </div>
+                    <span class="badge badge-brand">Dual approval</span>
+                  </div>
+                  <div class="approval-meta">
+                    <span class="badge badge-success">Owner: Finance director</span>
+                    <span class="badge badge-warning">Window: 2 hours</span>
+                  </div>
+                </article>
+
+                <article class="approval-card">
+                  <div class="approval-head">
+                    <div>
+                      <h4>Role changes touching live payouts</h4>
+                      <p>Security review stays separate from day-to-day operators to keep permissions auditable.</p>
+                    </div>
+                    <span class="badge badge-danger">Security sign-off</span>
+                  </div>
+                  <div class="approval-meta">
+                    <span class="badge badge-brand">Owner: Platform security</span>
+                    <span class="badge badge-warning">Window: Same day</span>
+                  </div>
+                </article>
+
+                <article class="approval-card">
+                  <div class="approval-head">
+                    <div>
+                      <h4>Dispute write-off above $10K</h4>
+                      <p>Risk lead approves the policy change before the new threshold ships to the live workspace.</p>
+                    </div>
+                    <span class="badge badge-warning">1 waiting</span>
+                  </div>
+                  <div class="approval-meta">
+                    <span class="badge badge-success">Owner: Risk lead</span>
+                    <span class="badge badge-brand">Scope: Revenue recovery</span>
+                  </div>
+                </article>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-header">
+                <div>
+                  <h3>Recent policy changes</h3>
+                  <p class="panel-subtext">Audit history with restrained table treatment and calm status color.</p>
+                </div>
+              </div>
+
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Change</th>
+                      <th>Owner</th>
+                      <th>Status</th>
+                      <th>Updated</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        Payout override threshold
+                        <span class="subline">Raised from $50K to $75K for high-risk cohorts</span>
+                      </td>
+                      <td>
+                        Priya N.
+                        <span class="subline">Revenue ops</span>
+                      </td>
+                      <td><span class="badge badge-warning">Pending</span></td>
+                      <td>
+                        14m ago
+                        <span class="subline">Approval requested</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Issuer evidence reminder cadence
+                        <span class="subline">Updated to two reminders before dispute cutoff</span>
+                      </td>
+                      <td>
+                        Isaac S.
+                        <span class="subline">Platform admin</span>
+                      </td>
+                      <td><span class="badge badge-success">Applied</span></td>
+                      <td>
+                        2h ago
+                        <span class="subline">Live workspace</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Team approval matrix
+                        <span class="subline">Added finance backup approver for weekend payout windows</span>
+                      </td>
+                      <td>
+                        Maya T.
+                        <span class="subline">Finance director</span>
+                      </td>
+                      <td><span class="badge badge-brand">Draft</span></td>
+                      <td>
+                        March 23, 2026
+                        <span class="subline">Needs review</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+
+          <div class="stack">
+            <section class="panel">
+              <div class="panel-header">
+                <div>
+                  <h3>Guardrails</h3>
+                  <p class="panel-subtext">Quiet side metadata card for critical environment rules.</p>
+                </div>
+              </div>
+
+              <div class="detail-card">
+                <div class="detail-row">
+                  <span>Environment</span>
+                  <strong>Live workspace</strong>
+                </div>
+                <div class="detail-row">
+                  <span>Change window</span>
+                  <strong>Weekdays 09:00-18:00 UTC</strong>
+                </div>
+                <div class="detail-row">
+                  <span>Audit retention</span>
+                  <strong>365 days</strong>
+                </div>
+                <div class="detail-row">
+                  <span>Last token sync</span>
+                  <strong>March 23, 2026</strong>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-header">
+                <div>
+                  <h3>Team approvals</h3>
+                  <p class="panel-subtext">Human routing stays clear, dense, and low-drama.</p>
+                </div>
+              </div>
+
+              <div class="member-list">
+                <div class="member-row">
+                  <div class="member-meta">
+                    <span class="member-avatar" aria-hidden="true">PN</span>
+                    <div>
+                      <strong>Priya N.</strong>
+                      <p>Revenue ops owner for payout and dispute rules.</p>
+                    </div>
+                  </div>
+                  <span class="badge badge-success">Primary approver</span>
+                </div>
+
+                <div class="member-row">
+                  <div class="member-meta">
+                    <span class="member-avatar" aria-hidden="true">MT</span>
+                    <div>
+                      <strong>Maya T.</strong>
+                      <p>Finance backup approver for live threshold changes.</p>
+                    </div>
+                  </div>
+                  <span class="badge badge-warning">Waiting</span>
+                </div>
+
+                <div class="member-row">
+                  <div class="member-meta">
+                    <span class="member-avatar" aria-hidden="true">AK</span>
+                    <div>
+                      <strong>Arun K.</strong>
+                      <p>Security sign-off for permission and role-impacting edits.</p>
+                    </div>
+                  </div>
+                  <span class="badge badge-brand">Security review</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-header">
+                <div>
+                  <h3>Operator note</h3>
+                  <p class="panel-subtext">A softer brand-tinted aside for the adaptation logic.</p>
+                </div>
+              </div>
+
+              <div class="note-card">
+                <h4>Settings are the real test of whether the continuation holds.</h4>
+                <p>
+                  If the visual system can stay coherent through dashboards, detail views, and settings,
+                  then the app guide is constraining enough to be useful. The point is not to mimic a hidden
+                  Stripe product screen, but to continue the observed design system into a believable product surface.
+                </p>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <div class="footer-strip">
+          Original content, adapted from the Stripe website visual system into a settings and approvals product screen.
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

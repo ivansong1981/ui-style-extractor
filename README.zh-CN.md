@@ -56,7 +56,7 @@
 - 一个可直接复制使用的风格指南模板
 - 一个可直接复用的 App UI 风格指南模板
 - 两个公开网页案例：`99percent` 和 `stripe`
-- 一个公开 App 延展示例：`Stripe`
+- 一个公开 App 延展示例：`Stripe`，并补到 dashboard / detail / settings 三张 proof screen
 - Stripe 案例附带更完整的原始提取资产
 
 ## Skill 内容
@@ -119,11 +119,11 @@
 
 ### Stripe 网站风格 -> Payments Operations App
 
-这一例不是宣称“直接从 Stripe 产品后台提取到了完整 App UI”，而是把同一套网站视觉系统继续推导进一个桌面优先的运营型产品界面里。
+这一例不是宣称“直接从 Stripe 产品后台提取到了完整 App UI”，而是把同一套网站视觉系统继续推导进一个桌面优先的运营型产品界面里，并扩成 dashboard、detail、settings 三张 proof screen。
 
-| App 指南 | App Demo |
-|----------|----------|
-| [stripe-app-ui-style.md](./stripe/stripe-app-ui-style.md) | [app-demo.html](./stripe/app-demo.html) |
+| App 指南 | Proof Screens |
+|----------|---------------|
+| [stripe-app-ui-style.md](./stripe/stripe-app-ui-style.md) | [dashboard](./stripe/app-demo.html) · [detail](./stripe/app-detail-demo.html) · [settings](./stripe/app-settings-demo.html) |
 
 网页来源 vs App 延展：
 
@@ -138,7 +138,11 @@
   </tr>
 </table>
 
-完整 App 长图见：[stripe/app-demo-fullpage.png](./stripe/app-demo-fullpage.png)
+扩展后的 App proof set：
+
+- Dashboard: [app-demo.html](./stripe/app-demo.html) · [viewport](./stripe/app-demo-viewport.png) · [full page](./stripe/app-demo-fullpage.png)
+- Detail: [app-detail-demo.html](./stripe/app-detail-demo.html) · [viewport](./stripe/app-detail-demo-viewport.png) · [full page](./stripe/app-detail-demo-fullpage.png)
+- Settings: [app-settings-demo.html](./stripe/app-settings-demo.html) · [viewport](./stripe/app-settings-demo-viewport.png) · [full page](./stripe/app-settings-demo-fullpage.png)
 
 ## 风格指南结构
 
@@ -184,7 +188,10 @@ ui-style-extractor/
     ├── stripe-app-ui-style.md
     ├── demo.html
     ├── app-demo.html
-    └── app-demo-viewport.png
+    ├── app-detail-demo.html
+    ├── app-settings-demo.html
+    ├── app-demo-viewport.png
+    └── app-*-demo-*.png
 ```
 
 ## FAQ

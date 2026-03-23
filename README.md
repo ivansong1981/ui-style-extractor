@@ -54,7 +54,7 @@ You see a website with a design you love. You want that *feel* for your own proj
 - A reusable style-guide template
 - A reusable app UI style-guide template
 - Two public website examples with reference vs generated screenshots
-- One public website-to-app continuation example for `stripe`
+- One public website-to-app continuation example for `stripe`, expanded into dashboard, detail, and settings proof screens
 - Raw extraction assets for a more complex design-system case (`stripe/`)
 
 ## Quick Start
@@ -141,11 +141,11 @@ Full-page validation screenshot: [stripe/demo-fullpage.png](./stripe/demo-fullpa
 
 ### Stripe Website Style → Payments Operations App
 
-Derived an app-facing product UI from the same Stripe website system. This is not presented as direct product extraction. It is a continuation of Stripe's token layer, visual discipline, and interaction tone into a desktop-first operations dashboard.
+Derived an app-facing product UI from the same Stripe website system. This is not presented as direct product extraction. It is a continuation of Stripe's token layer, visual discipline, and interaction tone into a desktop-first operations product with dashboard, detail, and settings proof screens.
 
-| App Guide | App Demo |
-|-----------|----------|
-| [stripe-app-ui-style.md](./stripe/stripe-app-ui-style.md) | [app-demo.html](./stripe/app-demo.html) |
+| App Guide | Proof Screens |
+|-----------|---------------|
+| [stripe-app-ui-style.md](./stripe/stripe-app-ui-style.md) | [dashboard](./stripe/app-demo.html) · [detail](./stripe/app-detail-demo.html) · [settings](./stripe/app-settings-demo.html) |
 
 Website source vs app continuation:
 
@@ -160,7 +160,11 @@ Website source vs app continuation:
   </tr>
 </table>
 
-Full-page app screenshot: [stripe/app-demo-fullpage.png](./stripe/app-demo-fullpage.png)
+Expanded app proof set:
+
+- Dashboard: [app-demo.html](./stripe/app-demo.html) · [viewport](./stripe/app-demo-viewport.png) · [full page](./stripe/app-demo-fullpage.png)
+- Detail: [app-detail-demo.html](./stripe/app-detail-demo.html) · [viewport](./stripe/app-detail-demo-viewport.png) · [full page](./stripe/app-detail-demo-fullpage.png)
+- Settings: [app-settings-demo.html](./stripe/app-settings-demo.html) · [viewport](./stripe/app-settings-demo-viewport.png) · [full page](./stripe/app-settings-demo-fullpage.png)
 
 ## Style Guide Structure
 
@@ -215,8 +219,11 @@ ui-style-extractor/
 │   ├── stripe-app-ui-style.md         # Example: app continuation of the Stripe system
 │   ├── demo.html                      # Example: generated validation page
 │   ├── app-demo.html                  # Example: generated app dashboard
+│   ├── app-detail-demo.html           # Example: generated app detail screen
+│   ├── app-settings-demo.html         # Example: generated app settings screen
 │   ├── demo-viewport.png              # Website validation screenshot used in README
-│   └── app-demo-viewport.png          # App continuation screenshot used in README
+│   ├── app-demo-viewport.png          # App continuation screenshot used in README
+│   └── app-*-demo-*.png               # App proof screenshots for dashboard/detail/settings
 ```
 
 ## FAQ
